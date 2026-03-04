@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <title>Contact — Cabinet Fiscal Immo</title>
+  <meta name="description"
+    content="Contactez le Cabinet Fiscal Immo. Premier échange gratuit et sans engagement. Appelez-nous ou remplissez le formulaire, nous vous recontactons sous 24h.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#EFF6FF',
+              100: '#DBEAFE',
+              200: '#BFDBFE',
+              300: '#93C5FD',
+              400: '#60A5FA',
+              500: '#1E5F8C',
+              600: '#1A5179',
+              700: '#164466',
+              800: '#0F2E45',
+              900: '#0A1F30',
+            },
+            accent: {
+              50: '#FFF7ED',
+              100: '#FFEDD5',
+              200: '#FED7AA',
+              300: '#FDBA74',
+              400: '#F59E0B',
+              500: '#E8850A',
+              600: '#D97706',
+              700: '#B45309',
+              800: '#92400E',
+              900: '#78350F',
+            },
+            surface: {
+              50: '#F8FAFC',
+              100: '#F1F5F9',
+              200: '#E2E8F0',
+            }
+          },
+          fontFamily: {
+            heading: ['Lexend', 'sans-serif'],
+            body: ['Source Sans 3', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Lexend', sans-serif;
+    }
+
+    /* Smooth reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* Floating navbar glassmorphism */
+    .nav-glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-glass.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* CTA pulse */
+    .pulse-ring {
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(232, 133, 10, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 12px rgba(232, 133, 10, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(232, 133, 10, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pulse-ring {
+        animation: none;
+      }
+    }
+
+    /* FAQ accordion */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .faq-answer.open {
+      max-height: 300px;
+    }
+
+    .faq-chevron {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-chevron.open {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+
+<body class="bg-white text-primary-800 antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar"
+    class="nav-glass fixed top-4 left-4 right-4 z-50 rounded-2xl border border-surface-200 px-4 sm:px-6 lg:px-8 py-3 transition-shadow duration-300">
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 cursor-pointer" aria-label="Accueil Cabinet Fiscal Immo">
+        <img src="assets/img/logo.png" alt="Cabinet Fiscal Immo" class="h-10 w-auto">
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Accueil</a>
+        <a href="services/fiscal.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Fiscal</a>
+        <a href="services/immobilier.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Immobilier</a>
+        <a href="services/affaires.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Affaires</a>
+        <a href="blog/index.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Blog</a>
+        <a href="contact.html"
+          class="text-sm font-semibold text-accent-500 transition-colors duration-200 cursor-pointer">Contact</a>
+      </div>
+
+      <!-- CTA Button -->
+      <a href="tel:+33602043255"
+        class="hidden md:inline-flex items-center gap-2 rounded-xl bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-accent-500/20 hover:bg-accent-600 transition-colors duration-200 cursor-pointer pulse-ring">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+        Prendre RDV
+      </a>
+
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn"
+        class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-surface-100 transition-colors cursor-pointer"
+        aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg class="h-6 w-6 text-primary-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-surface-200 pt-4">
+      <div class="flex flex-col gap-3">
+        <a href="index.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Accueil</a>
+        <a href="services/fiscal.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Fiscal</a>
+        <a href="services/immobilier.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Immobilier</a>
+        <a href="services/affaires.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Affaires</a>
+        <a href="blog/index.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Blog</a>
+        <a href="contact.html"
+          class="mobile-link text-sm font-semibold text-accent-500 px-2 py-1.5 cursor-pointer">Contact</a>
+        <a href="tel:+33602043255"
+          class="mt-2 flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white cursor-pointer">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Prendre RDV
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="bg-gradient-to-br from-primary-50 via-white to-surface-50 pt-32 pb-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="mb-8 reveal" aria-label="Fil d'Ariane">
+        <ol class="flex items-center gap-2 text-sm">
+          <li><a href="index.html"
+              class="text-primary-500 hover:text-accent-500 transition-colors cursor-pointer">Accueil</a></li>
+          <li>
+            <svg class="h-4 w-4 text-primary-300 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </li>
+          <li class="text-primary-800 font-medium">Contact</li>
+        </ol>
+      </nav>
+
+      <div class="max-w-3xl reveal">
+        <h1 class="font-heading text-4xl sm:text-5xl font-bold text-primary-800 mb-6">Contactez-nous</h1>
+        <p class="text-lg sm:text-xl text-primary-600 leading-relaxed">Premier &eacute;change gratuit et sans
+          engagement. Appelez-nous ou remplissez le formulaire, nous vous recontactons sous 24h.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT GRID ===== -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+
+        <!-- LEFT COLUMN - Contact Info -->
+        <div class="reveal">
+          <div class="space-y-6">
+            <!-- Phone -->
+            <a href="tel:+33602043255" class="flex items-start gap-4 group cursor-pointer">
+              <div
+                class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary-100 text-primary-500 group-hover:bg-primary-500 group-hover:text-white transition-colors duration-300">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-primary-800">T&eacute;l&eacute;phone</p>
+                <p class="text-primary-600 group-hover:text-accent-500 transition-colors">06 02 04 32 55</p>
+              </div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:contact@cabinetfiscalimmo.fr" class="flex items-start gap-4 group cursor-pointer">
+              <div
+                class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary-100 text-primary-500 group-hover:bg-primary-500 group-hover:text-white transition-colors duration-300">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M22 4l-10 8L2 4" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-primary-800">Email</p>
+                <p class="text-primary-600 group-hover:text-accent-500 transition-colors">contact@cabinetfiscalimmo.fr
+                </p>
+              </div>
+            </a>
+
+            <!-- Address -->
+            <div class="flex items-start gap-4">
+              <div
+                class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary-100 text-primary-500">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-primary-800">Adresse</p>
+                <p class="text-primary-600">Paris &amp; &Icirc;le-de-France</p>
+                <p class="text-sm text-primary-400">Consultations sur rendez-vous</p>
+              </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="flex items-start gap-4">
+              <div
+                class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary-100 text-primary-500">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-primary-800">Horaires</p>
+                <p class="text-primary-600">Lundi - Vendredi : 9h - 20h</p>
+                <p class="text-primary-600">Samedi : 10h - 17h</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nos poles d'expertise -->
+          <div class="mt-12">
+            <h3 class="font-heading text-lg font-semibold text-primary-800 mb-5">Nos p&ocirc;les d'expertise</h3>
+            <div class="grid sm:grid-cols-3 gap-4">
+              <a href="services/fiscal.html"
+                class="group flex flex-col items-center gap-3 rounded-xl border border-surface-200 bg-white p-5 hover:border-accent-500 hover:shadow-md transition-all duration-300 cursor-pointer">
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-100 text-primary-500 group-hover:bg-accent-500 group-hover:text-white transition-colors duration-300">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                </div>
+                <span
+                  class="text-sm font-semibold text-primary-700 group-hover:text-accent-500 transition-colors">Fiscalit&eacute;</span>
+              </a>
+
+              <a href="services/immobilier.html"
+                class="group flex flex-col items-center gap-3 rounded-xl border border-surface-200 bg-white p-5 hover:border-accent-500 hover:shadow-md transition-all duration-300 cursor-pointer">
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-100 text-primary-500 group-hover:bg-accent-500 group-hover:text-white transition-colors duration-300">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                  </svg>
+                </div>
+                <span
+                  class="text-sm font-semibold text-primary-700 group-hover:text-accent-500 transition-colors">Immobilier</span>
+              </a>
+
+              <a href="services/affaires.html"
+                class="group flex flex-col items-center gap-3 rounded-xl border border-surface-200 bg-white p-5 hover:border-accent-500 hover:shadow-md transition-all duration-300 cursor-pointer">
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-100 text-primary-500 group-hover:bg-accent-500 group-hover:text-white transition-colors duration-300">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                  </svg>
+                </div>
+                <span
+                  class="text-sm font-semibold text-primary-700 group-hover:text-accent-500 transition-colors">Affaires</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN - Contact Form -->
+        <div class="reveal">
+          <div class="rounded-2xl bg-white border border-surface-200 shadow-lg p-8">
+            <h2 class="font-heading text-2xl font-bold text-primary-800 mb-6">Envoyez-nous un message</h2>
+
+            <form id="contact-form" action="https://formsubmit.co/contact@cabinetfiscalimmo.fr" method="POST"
+              class="space-y-5">
+              <!-- Hidden fields -->
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
+              <input type="text" name="_honey" style="display:none">
+
+              <!-- Nom complet -->
+              <div>
+                <label for="name" class="block text-sm font-semibold text-primary-700 mb-1.5">Nom complet <span
+                    class="text-accent-500">*</span></label>
+                <input type="text" id="name" name="name" required placeholder="Votre nom et pr&eacute;nom"
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 placeholder-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-transparent transition-all duration-200">
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="email" class="block text-sm font-semibold text-primary-700 mb-1.5">Email <span
+                    class="text-accent-500">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="votre@email.fr"
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 placeholder-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-transparent transition-all duration-200">
+              </div>
+
+              <!-- Telephone -->
+              <div>
+                <label for="phone" class="block text-sm font-semibold text-primary-700 mb-1.5">T&eacute;l&eacute;phone
+                  <span class="text-accent-500">*</span></label>
+                <input type="tel" id="phone" name="phone" required placeholder="06 XX XX XX XX"
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 placeholder-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-transparent transition-all duration-200">
+              </div>
+
+              <!-- Votre situation -->
+              <div>
+                <label for="situation" class="block text-sm font-semibold text-primary-700 mb-1.5">Votre
+                  situation</label>
+                <select id="situation" name="situation"
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-transparent transition-all duration-200 cursor-pointer">
+                  <option value="" disabled selected>S&eacute;lectionnez votre situation</option>
+                  <option value="Particulier imposé">Particulier impos&eacute;</option>
+                  <option value="Investisseur immobilier">Investisseur immobilier</option>
+                  <option value="Dirigeant TPE/PME">Dirigeant TPE/PME</option>
+                  <option value="Gérant de SCI">G&eacute;rant de SCI</option>
+                  <option value="Locataire">Locataire</option>
+                  <option value="Copropriétaire">Copropri&eacute;taire</option>
+                  <option value="Autre situation">Autre situation</option>
+                </select>
+              </div>
+
+              <!-- Objet -->
+              <div>
+                <label for="subject" class="block text-sm font-semibold text-primary-700 mb-1.5">Objet</label>
+                <input type="text" id="subject" name="subject" placeholder="Sujet de votre demande"
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 placeholder-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-transparent transition-all duration-200">
+              </div>
+
+              <!-- Message -->
+              <div>
+                <label for="message" class="block text-sm font-semibold text-primary-700 mb-1.5">Message</label>
+                <textarea id="message" name="message" rows="5"
+                  placeholder="D&eacute;crivez votre situation ou votre besoin..."
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 placeholder-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-transparent transition-all duration-200 resize-vertical"></textarea>
+              </div>
+
+              <!-- Submit -->
+              <button type="submit"
+                class="w-full flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent-500/20 hover:bg-accent-600 transition-colors duration-200 cursor-pointer">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+                Envoyer votre demande
+              </button>
+
+              <p class="text-xs text-primary-400 text-center">Nous vous recontactons sous 24h. Aucun engagement.</p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LAWYER NETWORK SECTION ===== -->
+  <section class="bg-primary-500 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left - Text -->
+        <div class="reveal">
+          <h2 class="font-heading text-2xl sm:text-3xl font-bold text-white mb-6">Un r&eacute;seau d'avocats
+            exp&eacute;riment&eacute;s &agrave; vos c&ocirc;t&eacute;s</h2>
+          <p class="text-primary-100 leading-relaxed text-lg">En compl&eacute;ment de notre expertise administrative,
+            nous collaborons avec un r&eacute;seau d'avocats exp&eacute;riment&eacute;s (plus de 20 ans
+            d'exp&eacute;rience) pour vous offrir un accompagnement juridique solide lorsque votre situation le
+            n&eacute;cessite.</p>
+        </div>
+
+        <!-- Right - Benefits -->
+        <div class="reveal">
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-white/20 text-white">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-white">Accompagnement juridique compl&eacute;mentaire</p>
+                <p class="text-primary-200 text-sm mt-1">Un cadre juridique solide pour s&eacute;curiser vos
+                  d&eacute;marches administratives.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-white/20 text-white">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-white">Avocats exp&eacute;riment&eacute;s +20 ans</p>
+                <p class="text-primary-200 text-sm mt-1">Des professionnels aguerris avec plus de deux d&eacute;cennies
+                  de pratique.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-white/20 text-white">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-white">Coordination simplifi&eacute;e entre vos intervenants</p>
+                <p class="text-primary-200 text-sm mt-1">Nous facilitons les &eacute;changes entre tous les acteurs de
+                  votre dossier.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ SECTION ===== -->
+  <section class="bg-surface-50 py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-primary-800 mb-4">Questions fr&eacute;quentes</h2>
+        <p class="text-primary-600">Retrouvez les r&eacute;ponses aux questions les plus pos&eacute;es par nos clients.
+        </p>
+      </div>
+
+      <div class="space-y-4 reveal">
+        <!-- FAQ 1 -->
+        <div class="faq-item rounded-2xl border border-surface-200 bg-white overflow-hidden">
+          <button
+            class="faq-toggle w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer hover:bg-surface-50 transition-colors"
+            aria-expanded="false">
+            <span class="font-heading text-base font-semibold text-primary-800">Quel est le co&ucirc;t d'un premier
+              &eacute;change ?</span>
+            <svg class="faq-chevron h-5 w-5 flex-shrink-0 text-primary-400" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="faq-answer px-6">
+            <p class="text-primary-600 leading-relaxed pb-5">Le premier &eacute;change est enti&egrave;rement gratuit et
+              sans engagement. Il nous permet de comprendre votre situation et de vous proposer un accompagnement
+              adapt&eacute;.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item rounded-2xl border border-surface-200 bg-white overflow-hidden">
+          <button
+            class="faq-toggle w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer hover:bg-surface-50 transition-colors"
+            aria-expanded="false">
+            <span class="font-heading text-base font-semibold text-primary-800">Faites-vous du conseil juridique ou
+              fiscal ?</span>
+            <svg class="faq-chevron h-5 w-5 flex-shrink-0 text-primary-400" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="faq-answer px-6">
+            <p class="text-primary-600 leading-relaxed pb-5">Non. Notre r&ocirc;le est strictement administratif : nous
+              pr&eacute;parons, organisons et structurons vos dossiers. Pour le conseil juridique, nous collaborons avec
+              un r&eacute;seau d'avocats exp&eacute;riment&eacute;s. Pour le conseil fiscal, nous travaillons en
+              compl&eacute;ment de votre expert-comptable.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item rounded-2xl border border-surface-200 bg-white overflow-hidden">
+          <button
+            class="faq-toggle w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer hover:bg-surface-50 transition-colors"
+            aria-expanded="false">
+            <span class="font-heading text-base font-semibold text-primary-800">Comment se d&eacute;roule
+              l'accompagnement ?</span>
+            <svg class="faq-chevron h-5 w-5 flex-shrink-0 text-primary-400" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="faq-answer px-6">
+            <p class="text-primary-600 leading-relaxed pb-5">Apr&egrave;s un diagnostic gratuit, nous collectons vos
+              documents, les trions et les structurons en dossiers clairs. Nous assurons ensuite un suivi continu avec
+              alertes &eacute;ch&eacute;ances et mises &agrave; jour r&eacute;guli&egrave;res.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item rounded-2xl border border-surface-200 bg-white overflow-hidden">
+          <button
+            class="faq-toggle w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer hover:bg-surface-50 transition-colors"
+            aria-expanded="false">
+            <span class="font-heading text-base font-semibold text-primary-800">Intervenez-vous dans toute la France
+              ?</span>
+            <svg class="faq-chevron h-5 w-5 flex-shrink-0 text-primary-400" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="faq-answer px-6">
+            <p class="text-primary-600 leading-relaxed pb-5">Oui, nous accompagnons des clients partout en France. Les
+              &eacute;changes se font par t&eacute;l&eacute;phone, visioconf&eacute;rence et par voie num&eacute;rique.
+              Des rendez-vous en pr&eacute;sentiel sont possibles en &Icirc;le-de-France.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-primary-900 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-500 text-white">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div>
+              <span class="block font-heading text-sm font-bold tracking-wide text-white">CABINET FISCAL</span>
+              <span class="block font-heading text-xs font-medium tracking-widest text-accent-400">IMMO</span>
+            </div>
+          </a>
+          <p class="text-primary-400 text-sm leading-relaxed max-w-md">Nous accompagnons particuliers, investisseurs et
+            dirigeants dans la pr&eacute;paration, l'organisation et le suivi de tous leurs dossiers fiscaux,
+            immobiliers et
+            administratifs.</p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Navigation</h4>
+          <ul class="space-y-2.5">
+            <li><a href="index.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Accueil</a></li>
+            <li><a href="services/fiscal.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Fiscal</a></li>
+            <li><a href="services/immobilier.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Immobilier</a>
+            </li>
+            <li><a href="services/affaires.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Affaires</a>
+            </li>
+            <li><a href="blog/index.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Blog</a></li>
+            <li><a href="contact.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Informations</h4>
+          <ul class="space-y-2.5">
+            <li><a href="mentions-legales.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Mentions
+                l&eacute;gales</a></li>
+            <li><a href="politique-confidentialite.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Politique de
+                confidentialit&eacute;</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-primary-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-primary-500">&copy; 2025 Cabinet Fiscal Immo. Tous droits r&eacute;serv&eacute;s.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-primary-500 hover:text-accent-400 transition-colors cursor-pointer"
+            aria-label="LinkedIn">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+          <a href="#" class="text-primary-500 hover:text-accent-400 transition-colors cursor-pointer"
+            aria-label="Instagram">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+            </svg>
+          </a>
+          <a href="#" class="text-primary-500 hover:text-accent-400 transition-colors cursor-pointer"
+            aria-label="Facebook">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== FLOATING CTA (Mobile) ===== -->
+  <div class="fixed bottom-6 right-6 z-50 md:hidden">
+    <a href="tel:+33602043255"
+      class="flex h-14 w-14 items-center justify-center rounded-full bg-accent-500 text-white shadow-xl shadow-accent-500/30 hover:bg-accent-600 transition-colors cursor-pointer pulse-ring"
+      aria-label="Appeler le Cabinet Fiscal Immo">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path
+          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      mobileBtn.setAttribute('aria-expanded', !isOpen);
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // FAQ accordion toggle
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const chevron = item.querySelector('.faq-chevron');
+        const isOpen = answer.classList.contains('open');
+
+        // Close all other FAQs
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.querySelector('.faq-answer').classList.remove('open');
+            otherItem.querySelector('.faq-chevron').classList.remove('open');
+            otherItem.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Toggle current
+        answer.classList.toggle('open');
+        chevron.classList.toggle('open');
+        button.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+
+    // Form submission with FormSubmit
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<svg class="animate-spin h-5 w-5" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>';
+
+      fetch("https://formsubmit.co/ajax/contact@cabinetfiscalimmo.fr", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: e.target.name.value,
+          email: e.target.email.value,
+          phone: e.target.phone.value,
+          situation: e.target.situation.value,
+          subject: e.target.subject.value,
+          message: e.target.message.value
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          btn.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Demande envoy\u00e9e !';
+          btn.classList.remove('bg-accent-500', 'hover:bg-accent-600');
+          btn.classList.add('bg-green-500');
+
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.classList.remove('bg-green-500');
+            btn.classList.add('bg-accent-500', 'hover:bg-accent-600');
+            e.target.reset();
+          }, 3000);
+        })
+        .catch(error => {
+          btn.innerHTML = 'Erreur. R\u00e9essayez.';
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+          }, 3000);
+        });
+    });
+  </script>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner"
+    class="fixed bottom-0 left-0 right-0 z-[100] bg-primary-900 border-t border-primary-800 p-4 transform translate-y-full transition-transform duration-500 flex flex-col sm:flex-row items-center justify-center gap-4 shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
+    <p class="text-sm text-primary-200 text-center sm:text-left max-w-3xl">
+      Cabinet Fiscal Immo utilise des cookies pour assurer le bon fonctionnement du site et r&eacute;aliser des
+      statistiques de visites.
+      <a href="politique-confidentialite.html"
+        class="text-accent-400 hover:text-accent-300 underline font-medium cursor-pointer">En savoir plus</a>.
+    </p>
+    <div class="flex gap-3 flex-shrink-0">
+      <button id="cookie-refuse"
+        class="px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 rounded-xl transition-colors border border-primary-700 cursor-pointer">Refuser</button>
+      <button id="cookie-accept"
+        class="px-5 py-2.5 text-sm font-semibold text-white bg-accent-500 hover:bg-accent-600 rounded-xl transition-colors shadow-lg shadow-accent-500/20 cursor-pointer">Accepter</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const banner = document.getElementById('cookie-banner');
+      if (!localStorage.getItem('cookie_consent')) {
+        setTimeout(() => banner.classList.remove('translate-y-full'), 1000);
+      }
+      document.getElementById('cookie-accept').addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'accepted');
+        banner.classList.add('translate-y-full');
+      });
+      document.getElementById('cookie-refuse').addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'refused');
+        banner.classList.add('translate-y-full');
+      });
+    });
+  </script>
+
+</body>
+
+</html>

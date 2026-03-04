@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <title>Cabinet Fiscal Immo — Fiscalité, Immobilier & Organisation Administrative</title>
+  <meta name="description"
+    content="Le Cabinet Fiscal Immo accompagne particuliers, investisseurs et dirigeants dans la préparation, l'organisation et le suivi de tous leurs dossiers fiscaux, immobiliers et administratifs.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#EFF6FF',
+              100: '#DBEAFE',
+              200: '#BFDBFE',
+              300: '#93C5FD',
+              400: '#60A5FA',
+              500: '#1E5F8C',
+              600: '#1A5179',
+              700: '#164466',
+              800: '#0F2E45',
+              900: '#0A1F30',
+            },
+            accent: {
+              50: '#FFF7ED',
+              100: '#FFEDD5',
+              200: '#FED7AA',
+              300: '#FDBA74',
+              400: '#F59E0B',
+              500: '#E8850A',
+              600: '#D97706',
+              700: '#B45309',
+              800: '#92400E',
+              900: '#78350F',
+            },
+            surface: {
+              50: '#F8FAFC',
+              100: '#F1F5F9',
+              200: '#E2E8F0',
+            }
+          },
+          fontFamily: {
+            heading: ['Lexend', 'sans-serif'],
+            body: ['Source Sans 3', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Lexend', sans-serif;
+    }
+
+    /* Smooth reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* Floating navbar glassmorphism */
+    .nav-glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-glass.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Blog card hover */
+    .blog-card:hover .blog-img {
+      transform: scale(1.05);
+    }
+
+    /* CTA pulse */
+    .pulse-ring {
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(232, 133, 10, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 12px rgba(232, 133, 10, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(232, 133, 10, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pulse-ring {
+        animation: none;
+      }
+    }
+
+    /* Counter animation */
+    .stat-number {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-primary-800 antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar"
+    class="nav-glass fixed top-4 left-4 right-4 z-50 rounded-2xl border border-surface-200 px-4 sm:px-6 lg:px-8 py-3 transition-shadow duration-300">
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center cursor-pointer" aria-label="Accueil Cabinet Fiscal Immo">
+        <img src="assets/img/logo.png" alt="Cabinet Fiscal Immo" class="h-10 w-auto">
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#hero"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Accueil</a>
+        <a href="#approche"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Notre
+          approche</a>
+        <a href="#qui-sommes-nous"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Qui
+          sommes-nous</a>
+        <a href="#horaires"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Horaires</a>
+        <a href="contact.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Contact</a>
+      </div>
+
+      <!-- CTA Button -->
+      <a href="tel:+33602043255"
+        class="hidden md:inline-flex items-center gap-2 rounded-xl bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-accent-500/20 hover:bg-accent-600 transition-colors duration-200 cursor-pointer pulse-ring">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+        Prendre RDV
+      </a>
+
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn"
+        class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-surface-100 transition-colors cursor-pointer"
+        aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg class="h-6 w-6 text-primary-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-surface-200 pt-4">
+      <div class="flex flex-col gap-3">
+        <a href="#hero"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Accueil</a>
+        <a href="#approche"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Notre
+          approche</a>
+        <a href="#qui-sommes-nous"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Qui
+          sommes-nous</a>
+        <a href="#horaires"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Horaires</a>
+        <a href="contact.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Contact</a>
+        <a href="tel:+33602043255"
+          class="mt-2 flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white cursor-pointer">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Prendre RDV
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero"
+    class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-surface-50 pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36">
+    <!-- Subtle decorative shapes -->
+    <div
+      class="absolute top-0 right-0 w-96 h-96 bg-accent-100 rounded-full opacity-30 blur-3xl -translate-y-1/2 translate-x-1/3">
+    </div>
+    <div
+      class="absolute bottom-0 left-0 w-80 h-80 bg-primary-100 rounded-full opacity-40 blur-3xl translate-y-1/3 -translate-x-1/4">
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left content -->
+        <div class="reveal">
+          <div class="inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-1.5 mb-6">
+            <div class="h-2 w-2 rounded-full bg-accent-500"></div>
+            <span class="text-xs font-semibold tracking-wide text-primary-700 uppercase">Pôle Fiscal &middot; Immobilier
+              &middot; Affaires</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] font-bold leading-tight text-primary-900 mb-6">
+            Avec nous, un seul <span class="text-accent-500">contact</span> pour tout <span
+              class="text-accent-500">organiser</span>, tout <span class="text-accent-500">sécuriser</span> et tout
+            <span class="text-accent-500">optimiser</span> – sans tracas, sans erreur.
+          </h1>
+
+          <p class="text-lg sm:text-xl text-primary-600 leading-relaxed max-w-xl mb-8">
+            Le Cabinet Fiscal Immo accompagne les particuliers, dirigeants, investisseurs, entreprises et institutions
+            publiques dans la structuration, l'organisation et la fiabilisation de leurs démarches administratives,
+            financières, fiscales et patrimoniales.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="tel:+33602043255"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-accent-500/25 hover:bg-accent-600 hover:shadow-accent-500/35 transition-all duration-200 cursor-pointer pulse-ring">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              Réserver un appel gratuit
+            </a>
+            <a href="#services"
+              class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-primary-200 bg-white px-7 py-3.5 text-base font-semibold text-primary-700 hover:border-primary-300 hover:bg-primary-50 transition-all duration-200 cursor-pointer">
+              Découvrir nos services
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Trust badges -->
+          <div class="mt-10 flex items-center gap-6 text-sm text-primary-500">
+            <div class="flex items-center gap-2">
+              <svg class="h-5 w-5 text-accent-500" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              Confidentialité garantie
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="h-5 w-5 text-accent-500" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Premier échange offert
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Abstract illustration -->
+        <div class="reveal relative">
+          <div
+            class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-primary-500 via-primary-600 to-primary-800 aspect-[4/5] flex items-center justify-center shadow-2xl shadow-primary-900/20">
+            <!-- Abstract geometric pattern -->
+            <div class="absolute inset-0 opacity-10">
+              <div class="absolute top-10 left-10 w-32 h-32 border-2 border-white rounded-2xl rotate-12"></div>
+              <div class="absolute top-20 right-16 w-24 h-24 border-2 border-white rounded-full"></div>
+              <div class="absolute bottom-20 left-16 w-40 h-28 border-2 border-white rounded-xl -rotate-6"></div>
+              <div class="absolute bottom-10 right-10 w-20 h-20 border-2 border-white rounded-lg rotate-45"></div>
+            </div>
+            <!-- Main icon cluster -->
+            <div class="relative text-center text-white p-8">
+              <div class="flex items-center justify-center gap-6 mb-8">
+                <div class="flex h-20 w-20 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
+                  <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+                <div class="flex h-20 w-20 items-center justify-center rounded-2xl bg-accent-500/30 backdrop-blur-sm">
+                  <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="font-heading text-2xl font-bold mb-2">CABINET FISCAL IMMO</h3>
+              <p class="text-white/70 text-sm font-medium tracking-widest uppercase">Pôle Fiscal · Immobilier · Affaires
+              </p>
+            </div>
+            <!-- Overlay card at bottom -->
+            <div
+              class="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/15 backdrop-blur-md border border-white/20 p-5">
+              <div class="flex items-center gap-4">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-500 text-white flex-shrink-0">
+                  <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-white text-sm">Des dossiers clairs et structurés</p>
+                  <p class="text-xs text-white/70 mt-0.5">Prêts pour vos experts et conseils</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS BAR ===== -->
+  <section class="bg-primary-500 py-8 sm:py-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center reveal">
+          <p class="stat-number text-3xl sm:text-4xl font-heading font-bold text-white" data-target="500">0</p>
+          <p class="text-sm text-primary-200 mt-1">Dossiers traités</p>
+        </div>
+        <div class="text-center reveal">
+          <p class="stat-number text-3xl sm:text-4xl font-heading font-bold text-white" data-target="98"
+            data-suffix="%">0</p>
+          <p class="text-sm text-primary-200 mt-1">Clients satisfaits</p>
+        </div>
+        <div class="text-center reveal">
+          <p class="stat-number text-3xl sm:text-4xl font-heading font-bold text-white" data-target="10">0</p>
+          <p class="text-sm text-primary-200 mt-1">Années d'expérience</p>
+        </div>
+        <div class="text-center reveal">
+          <p class="stat-number text-3xl sm:text-4xl font-heading font-bold text-white" data-target="48"
+            data-suffix="h">0</p>
+          <p class="text-sm text-primary-200 mt-1">Délai moyen de traitement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section id="services" class="py-20 sm:py-28 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-500 mb-3">Nos
+          expertises</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-primary-900 mb-4">Des solutions sur mesure pour chaque situation
+        </h2>
+        <p class="text-lg text-primary-500 max-w-2xl mx-auto">Nous intervenons en partenariat avec vos professionnels
+          pour transformer chaque situation en dossiers clairs, structurés et immédiatement exploitables.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+        <!-- Service 1: FISCAL -->
+        <a href="services/fiscal.html"
+          class="reveal group rounded-2xl border border-surface-200 bg-surface-50 p-8 hover:border-accent-200 hover:shadow-lg hover:shadow-accent-500/5 transition-all duration-300 cursor-pointer block">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6 group-hover:bg-accent-100 group-hover:text-accent-600 transition-colors duration-300">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-primary-800 mb-3">Fiscal &mdash; Déclarations</h3>
+          <p class="text-primary-500 leading-relaxed mb-4">Accompagnement administratif pour vos déclarations fiscales :
+            préparation des éléments, classement des justificatifs, constitution de dossiers.</p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Particuliers & dirigeants
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Revenus fonciers & LMNP
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Contrôles & régularisations
+            </li>
+          </ul>
+          <span
+            class="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 mt-5 group-hover:gap-2 transition-all">
+            En savoir plus
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+
+        <!-- Service 2: ENTREPRISES & SOCIETES -->
+        <a href="services/affaires.html"
+          class="reveal group rounded-2xl border border-surface-200 bg-surface-50 p-8 hover:border-accent-200 hover:shadow-lg hover:shadow-accent-500/5 transition-all duration-300 cursor-pointer block">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6 group-hover:bg-accent-100 group-hover:text-accent-600 transition-colors duration-300">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-primary-800 mb-3">Entreprises & Sociétés</h3>
+          <p class="text-primary-500 leading-relaxed mb-4">Soutien administratif aux créateurs, dirigeants de sociétés,
+            TPE/PME, indépendants : dossiers de création, suivi juridique.</p>
+          <ul class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Création d'entreprise
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              BIC, BNC, IS, TVA
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Dirigeants & rémunération
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Statuts & modifications
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Dossiers comptables
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Suivi multi-structures
+            </li>
+          </ul>
+          <span
+            class="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 mt-5 group-hover:gap-2 transition-all">
+            En savoir plus
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+
+        <!-- Service 3: URSSAF -->
+        <a href="services/fiscal.html#urssaf"
+          class="reveal group rounded-2xl border border-surface-200 bg-surface-50 p-8 hover:border-accent-200 hover:shadow-lg hover:shadow-accent-500/5 transition-all duration-300 cursor-pointer block">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6 group-hover:bg-accent-100 group-hover:text-accent-600 transition-colors duration-300">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-primary-800 mb-3">URSSAF & Charges sociales</h3>
+          <p class="text-primary-500 leading-relaxed mb-4">Aide matérielle et documentaire pour vos affiliations,
+            déclarations, régularisations et échanges avec l'URSSAF.</p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Affiliation & immatriculation
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Relances & échéanciers
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Suivi des cotisations
+            </li>
+          </ul>
+          <span
+            class="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 mt-5 group-hover:gap-2 transition-all">
+            En savoir plus
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+
+        <!-- Service 4: IMMOBILIER PROPRIETAIRES -->
+        <a href="services/immobilier.html"
+          class="reveal group rounded-2xl border border-surface-200 bg-surface-50 p-8 hover:border-accent-200 hover:shadow-lg hover:shadow-accent-500/5 transition-all duration-300 cursor-pointer block">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6 group-hover:bg-accent-100 group-hover:text-accent-600 transition-colors duration-300">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-primary-800 mb-3">Immobilier &mdash; Propriétaires</h3>
+          <p class="text-primary-500 leading-relaxed mb-4">Organisation administrative pour propriétaires bailleurs,
+            SCI, investisseurs, LMNP : dossiers de location, revenus locatifs, travaux.</p>
+          <ul class="space-y-2 mb-4">
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              SCI, LMNP, multi-biens
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Dossiers bancaires & notaires
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Tableaux de bord patrimoine
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span><strong class="text-primary-700">Investisseurs étrangers en France</strong> — Dossiers structurés
+                pour vos banques, notaires et conseils français (pièces d'identité étrangères, justificatifs
+                internationaux, traductions)</span>
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span><strong class="text-primary-700">Coordination France / pays de résidence</strong> — Stratégie
+                administrative de votre patrimoine français, compatible avec votre organisation internationale</span>
+            </li>
+          </ul>
+          <span
+            class="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 mt-5 group-hover:gap-2 transition-all">
+            En savoir plus
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+
+        <!-- Service 5: IMMOBILIER LOCATAIRES -->
+        <a href="services/immobilier.html#locataires"
+          class="reveal group rounded-2xl border border-surface-200 bg-surface-50 p-8 hover:border-accent-200 hover:shadow-lg hover:shadow-accent-500/5 transition-all duration-300 cursor-pointer block">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6 group-hover:bg-accent-100 group-hover:text-accent-600 transition-colors duration-300">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-primary-800 mb-3">Immobilier &mdash; Locataires</h3>
+          <p class="text-primary-500 leading-relaxed mb-4">Appui administratif pour locataires et colocataires :
+            constitution de dossier, suivi du bail, courriers factuels.</p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Dossier de candidature
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Suivi bail & quittances
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Changement de situation
+            </li>
+          </ul>
+          <span
+            class="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 mt-5 group-hover:gap-2 transition-all">
+            En savoir plus
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+
+        <!-- Service 6: COPROPRIETE -->
+        <a href="services/immobilier.html#copropriete"
+          class="reveal group rounded-2xl border border-surface-200 bg-surface-50 p-8 hover:border-accent-200 hover:shadow-lg hover:shadow-accent-500/5 transition-all duration-300 cursor-pointer block">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6 group-hover:bg-accent-100 group-hover:text-accent-600 transition-colors duration-300">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="6" width="22" height="16" rx="2" />
+              <path d="M1 10h22" />
+              <path d="M7 6V2" />
+              <path d="M17 6V2" />
+              <path d="M12 6V2" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-primary-800 mb-3">Copropriété & Syndics</h3>
+          <p class="text-primary-500 leading-relaxed mb-4">Accompagnement administratif des syndics, conseils syndicaux
+            et copropriétaires : assemblées générales, archives, suivi.</p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Préparation des AG
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Archivage & structuration
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Dossiers copropriétaires
+            </li>
+          </ul>
+          <span
+            class="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 mt-5 group-hover:gap-2 transition-all">
+            En savoir plus
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+
+        <!-- Service 7: BANQUE -->
+        <a href="services/affaires.html#banque"
+          class="reveal group rounded-2xl border border-surface-200 bg-surface-50 p-8 hover:border-accent-200 hover:shadow-lg hover:shadow-accent-500/5 transition-all duration-300 cursor-pointer block">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6 group-hover:bg-accent-100 group-hover:text-accent-600 transition-colors duration-300">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+              <line x1="1" y1="10" x2="23" y2="10" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-primary-800 mb-3">Banque & Affaires courantes</h3>
+          <p class="text-primary-500 leading-relaxed mb-4">Constitution et mise en forme de vos dossiers bancaires et
+            financiers : crédits, renégociations, KYC, financement de projets.</p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Crédits immo & pro
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              KYC & mises à jour
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Organisation patrimoniale
+            </li>
+          </ul>
+          <span
+            class="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 mt-5 group-hover:gap-2 transition-all">
+            En savoir plus
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+
+        <!-- Service 8: ADMINISTRATIONS PUBLIQUES -->
+        <a href="contact.html"
+          class="reveal group rounded-2xl border border-surface-200 bg-surface-50 p-8 hover:border-accent-200 hover:shadow-lg hover:shadow-accent-500/5 transition-all duration-300 cursor-pointer block">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6 group-hover:bg-accent-100 group-hover:text-accent-600 transition-colors duration-300">
+            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18" />
+              <path d="M5 21V7l7-4 7 4v14" />
+              <path d="M9 21v-4h6v4" />
+              <path d="M10 10h4" />
+              <path d="M10 14h4" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-primary-800 mb-3">Administrations publiques</h3>
+          <p class="text-primary-500 leading-relaxed mb-4">Structuration et modernisation de la gestion administrative
+            des collectivités, établissements publics et structures parapubliques.</p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Diagnostic organisationnel
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Manuels de procédures
+            </li>
+            <li class="flex items-center gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Marchés publics &amp; RH
+            </li>
+          </ul>
+          <span
+            class="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 mt-5 group-hover:gap-2 transition-all">
+            En savoir plus
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NOTRE APPROCHE ===== -->
+  <section id="approche" class="py-20 sm:py-28 bg-surface-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-500 mb-3">Notre
+          approche</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-primary-900 mb-4">Un interlocuteur unique pour structurer,
+          organiser et sécuriser vos démarches</h2>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div class="reveal">
+          <h3 class="font-heading text-2xl font-bold text-primary-900 mb-4">CABINET FISCAL IMMO</h3>
+          <p class="text-xl font-heading font-semibold text-accent-500 mb-6">Des solutions sur mesure pour chaque
+            situation</p>
+          <div class="space-y-4 text-primary-600 leading-relaxed">
+            <p>Le <strong class="text-primary-800">CABINET FISCAL IMMO</strong> accompagne les particuliers, dirigeants,
+              investisseurs, entreprises et institutions publiques dans la structuration administrative, l'organisation
+              et la fiabilisation de leurs démarches administratives, financières, fiscales et patrimoniales.</p>
+            <p>Nous intervenons aussi en partenariat étroit avec vos conseils réglementés (experts‑comptables, avocats,
+              notaires, établissements bancaires et financiers) afin de transformer chaque situation en dossiers clairs,
+              structurés et immédiatement exploitables par les professionnels qui sécurisent vos décisions et vos actes.
+            </p>
+            <p>Notre équipe capitalise sur une expérience solide au sein de la <strong
+                class="text-primary-800">Direction générale des Finances publiques</strong> et en <strong
+                class="text-primary-800">cabinet d'avocats</strong>.</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="space-y-4 text-primary-600 leading-relaxed">
+            <p>Notre expérience et notre culture, à la fois fiscales, immobilières, juridiques, financières et
+              managériales, nous permettent d'intervenir avec une rigueur élevée, une exigence constante de conformité
+              et un sens opérationnel affirmé, exclusivement sur le volet administratif.</p>
+            <div class="rounded-2xl bg-accent-50 border border-accent-200 p-6 my-6">
+              <p class="font-heading font-bold text-primary-800 mb-2">Notre valeur ajoutée</p>
+              <p class="text-primary-700">Une approche 100 % opérationnelle, centrée sur la structuration et la
+                fiabilisation de vos dossiers, au service de vos décisions.</p>
+            </div>
+            <p>En choisissant le Cabinet Fiscal Immo, vous vous appuyez sur un <strong
+                class="text-primary-800">interlocuteur unique</strong> pour la coordination de vos dossiers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHOTO EQUIPE ===== -->
+  <section class="relative overflow-hidden">
+    <img src="assets/img/image.png" alt="L'équipe Cabinet Fiscal Immo en réunion client à Paris"
+      class="w-full h-[320px] sm:h-[420px] lg:h-[520px] object-cover object-center">
+    <div class="absolute inset-0 bg-gradient-to-t from-primary-900/70 via-primary-900/10 to-transparent flex items-end">
+      <div class="px-6 pb-8 sm:pb-12 max-w-7xl mx-auto w-full sm:px-8">
+        <p class="text-white text-xl sm:text-2xl font-heading font-bold mb-1">Cabinet Fiscal Immo</p>
+        <p class="text-primary-200 text-sm sm:text-base">Une équipe d'experts à votre service, Paris &amp; Île-de-France
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUI SOMMES-NOUS ===== -->
+  <section id="qui-sommes-nous" class="py-20 sm:py-28 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="reveal">
+          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-500 mb-3">Qui
+            sommes-nous ?</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-primary-900 mb-6">Une expertise au service de votre sérénité
+            administrative</h2>
+          <div class="space-y-4 text-primary-600 leading-relaxed">
+            <p>Le Cabinet Fiscal Immo est né de la volonté de mettre à disposition des particuliers, dirigeants et
+              institutions une expertise administrative rigoureuse, issue de la fonction publique et du monde juridique.
+            </p>
+            <p>Notre fondateur, <strong class="text-primary-800">Monsieur Dago ABDELBASSIT</strong>, capitalise sur une
+              expérience solide au sein de la Direction générale des Finances publiques et en cabinet d'avocats, pour
+              vous accompagner avec méthode et exigence.</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-primary-50 border border-primary-200 p-6 text-center">
+              <p class="font-heading text-3xl font-bold text-primary-800 mb-1">10+</p>
+              <p class="text-sm text-primary-600">Années d'expérience</p>
+            </div>
+            <div class="rounded-2xl bg-accent-50 border border-accent-200 p-6 text-center">
+              <p class="font-heading text-3xl font-bold text-accent-600 mb-1">500+</p>
+              <p class="text-sm text-primary-600">Dossiers traités</p>
+            </div>
+            <div class="rounded-2xl bg-primary-50 border border-primary-200 p-6 text-center">
+              <p class="font-heading text-3xl font-bold text-primary-800 mb-1">98%</p>
+              <p class="text-sm text-primary-600">Clients satisfaits</p>
+            </div>
+            <div class="rounded-2xl bg-accent-50 border border-accent-200 p-6 text-center">
+              <p class="font-heading text-3xl font-bold text-accent-600 mb-1">IDF</p>
+              <p class="text-sm text-primary-600">Toute la région</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ZONE D'INTERVENTION ===== -->
+  <section class="py-16 sm:py-20 bg-primary-500">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-300 mb-3">Zone
+          d'intervention</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Paris &amp; Île-de-France</h2>
+        <p class="text-lg text-primary-200 max-w-3xl mx-auto">CABINET FISCAL IMMO accompagne les particuliers et
+          professionnels sur l'ensemble de Paris et de la région Île-de-France.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal">
+        <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-4 text-center">
+          <p class="font-heading font-bold text-white">Paris (75)</p>
+        </div>
+        <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-4 text-center">
+          <p class="font-heading font-bold text-white">Hauts-de-Seine (92)</p>
+        </div>
+        <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-4 text-center">
+          <p class="font-heading font-bold text-white">Seine-Saint-Denis (93)</p>
+        </div>
+        <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-4 text-center">
+          <p class="font-heading font-bold text-white">Val-de-Marne (94)</p>
+        </div>
+        <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-4 text-center">
+          <p class="font-heading font-bold text-white">Yvelines (78)</p>
+        </div>
+        <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-4 text-center">
+          <p class="font-heading font-bold text-white">Essonne (91)</p>
+        </div>
+        <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-4 text-center">
+          <p class="font-heading font-bold text-white">Val-d'Oise (95)</p>
+        </div>
+        <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-4 text-center">
+          <p class="font-heading font-bold text-white">Seine-et-Marne (77)</p>
+        </div>
+      </div>
+      <p class="text-center text-primary-200 text-sm mt-8 reveal max-w-2xl mx-auto">Que vous résidiez à
+        Boulogne-Billancourt, Montreuil, Créteil, Nanterre, Saint-Denis, Versailles, Évry-Courcouronnes ou Cergy, notre
+        cabinet est à votre disposition.</p>
+    </div>
+  </section>
+
+  <!-- ===== HORAIRES & LOCALISATION ===== -->
+  <section id="horaires" class="py-20 sm:py-28 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div class="reveal">
+          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-500 mb-3">Horaires &amp;
+            localisation</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-primary-900 mb-6">Nous sommes à votre écoute</h2>
+          <p class="text-lg text-primary-600 leading-relaxed mb-8">Nous vous accueillons du lundi au samedi dans nos
+            locaux, au cœur du 12ᵉ arrondissement de Paris, à deux pas de la Gare de Lyon. Nous pouvons également vous
+            recevoir chez nos partenaires à Paris et en Île-de-France (sur rendez-vous), ou organiser un échange en
+            visioconférence ou par téléphone selon votre préférence.</p>
+          <a href="tel:+33602043255"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-accent-500/25 hover:bg-accent-600 transition-all duration-200 cursor-pointer pulse-ring">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            Prendre rendez-vous
+          </a>
+        </div>
+        <div class="reveal">
+          <div class="rounded-2xl border border-surface-200 bg-surface-50 p-8">
+            <h3 class="font-heading text-xl font-bold text-primary-800 mb-6">Nos horaires</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center py-2 border-b border-surface-200">
+                <span class="font-medium text-primary-700">Lundi</span>
+                <span class="text-primary-600">09:00 — 20:00</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-surface-200">
+                <span class="font-medium text-primary-700">Mardi</span>
+                <span class="text-primary-600">09:00 — 20:00</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-surface-200">
+                <span class="font-medium text-primary-700">Mercredi</span>
+                <span class="text-primary-600">09:00 — 20:00</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-surface-200">
+                <span class="font-medium text-primary-700">Jeudi</span>
+                <span class="text-primary-600">09:00 — 20:00</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-surface-200">
+                <span class="font-medium text-primary-700">Vendredi</span>
+                <span class="text-primary-600">09:00 — 20:00</span>
+              </div>
+              <div class="flex justify-between items-center py-2 bg-accent-50 rounded-lg px-3 -mx-3">
+                <span class="font-medium text-accent-700">Samedi</span>
+                <span class="font-semibold text-accent-600">10:00 — 17:00</span>
+              </div>
+            </div>
+            <div class="mt-6 flex items-start gap-3">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <p class="text-sm text-primary-600">12ᵉ arrondissement de Paris, à deux pas de la Gare de Lyon</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BEFORE/AFTER (Transformation) ===== -->
+  <section class="py-20 sm:py-28 bg-surface-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-500 mb-3">Avant /
+          Après</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-primary-900 mb-4">La transformation de vos dossiers</h2>
+        <p class="text-lg text-primary-500 max-w-2xl mx-auto">Découvrez comment nous transformons le chaos administratif
+          en organisation structurée.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+        <!-- BEFORE -->
+        <div class="reveal rounded-2xl border-2 border-red-200 bg-white p-8 relative">
+          <div class="absolute -top-4 left-8 px-4 py-1 bg-red-100 text-red-700 font-semibold text-sm rounded-full">Avant
+          </div>
+          <ul class="space-y-4 mt-4">
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              <span class="text-primary-600">Documents éparpillés entre mails, tiroirs et dossiers papier</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              <span class="text-primary-600">Échéances fiscales oubliées et pénalités de retard</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              <span class="text-primary-600">Votre expert-comptable vous relance pour des pièces manquantes</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              <span class="text-primary-600">Stress permanent à chaque courrier administratif</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-red-400 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+              <span class="text-primary-600">Temps perdu à chercher le bon document au mauvais moment</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- AFTER -->
+        <div class="reveal rounded-2xl border-2 border-green-200 bg-white p-8 relative">
+          <div class="absolute -top-4 left-8 px-4 py-1 bg-green-100 text-green-700 font-semibold text-sm rounded-full">
+            Après</div>
+          <ul class="space-y-4 mt-4">
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span class="text-primary-600">Un dossier unique, numérique et classé par thème</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span class="text-primary-600">Alertes et rappels avant chaque échéance</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span class="text-primary-600">Dossiers complets transmis directement à vos conseils</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span class="text-primary-600">Sérénité totale face à l'administratif</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span class="text-primary-600">Du temps retrouvé pour ce qui compte vraiment</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== METHODE (How it works) ===== -->
+  <section id="methode" class="py-20 sm:py-28 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-500 mb-3">Notre
+          méthode</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-primary-900 mb-4">Notre méthode en 4 étapes pour une gestion
+          administrative optimisée</h2>
+        <p class="text-lg text-primary-500 max-w-2xl mx-auto">Un processus structuré et éprouvé pour reprendre le
+          contrôle de vos dossiers.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Step 1 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-8">
+          <div class="flex items-center gap-4 mb-6">
+            <div
+              class="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-100 text-accent-600 font-heading font-bold text-xl flex-shrink-0">
+              1</div>
+            <h3 class="text-xl font-heading font-bold text-primary-800">Diagnostic personnalisé</h3>
+          </div>
+          <p class="text-primary-600 mb-4 font-semibold">Gratuit et sans engagement</p>
+          <p class="text-sm text-primary-500 leading-relaxed mb-4">Un échange dédié pour :</p>
+          <ul class="space-y-2 mb-4">
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Analyser votre situation actuelle (dossiers en retard, échéances urgentes, besoins spécifiques)
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Identifier les risques (pénalités, oublis, documents manquants) et les opportunités d'optimisation
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Vous proposer un plan d'action clair, avec une estimation des gains de temps et de sérénité
+            </li>
+          </ul>
+          <p class="text-xs text-accent-600 font-semibold bg-accent-50 rounded-lg px-4 py-2 inline-block">⏱ Durée : 30 à
+            45 minutes — Par téléphone, visio ou en présentiel</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-8">
+          <div class="flex items-center gap-4 mb-6">
+            <div
+              class="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-100 text-accent-600 font-heading font-bold text-xl flex-shrink-0">
+              2</div>
+            <h3 class="text-xl font-heading font-bold text-primary-800">Collecte &amp; tri expert</h3>
+          </div>
+          <p class="text-primary-600 mb-4 font-semibold">Nous prenons tout en charge</p>
+          <ul class="space-y-2">
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Récupération de vos documents (emails, papiers, fichiers numériques) via un espace sécurisé ou en physique
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Tri méthodique : classement par catégorie (fiscal, immobilier, affaires) et détection des pièces
+              manquantes grâce à notre checklist propriétaire
+            </li>
+          </ul>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-8">
+          <div class="flex items-center gap-4 mb-6">
+            <div
+              class="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-100 text-accent-600 font-heading font-bold text-xl flex-shrink-0">
+              3</div>
+            <h3 class="text-xl font-heading font-bold text-primary-800">Structuration stratégique</h3>
+          </div>
+          <p class="text-primary-600 mb-4 font-semibold">Transformation de vos dossiers en outils stratégiques</p>
+          <ul class="space-y-2 mb-4">
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Organisation selon les standards des professionnels (avocats, experts-comptables) pour un traitement sans
+              friction
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Annotations des points critiques (échéances, risques, opportunités) et synthèses exécutives pour vos
+              conseillers
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-600">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Intégration avec vos outils existants si nécessaire
+            </li>
+          </ul>
+          <p class="text-xs text-primary-500 bg-surface-50 rounded-lg px-4 py-2">💡 Exemple : Un dossier fiscal prêt à
+            être transmis à votre administration fiscale en 24h, avec toutes les pièces justificatives vérifiées.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="reveal rounded-2xl border border-accent-200 bg-accent-50 p-8">
+          <div class="flex items-center gap-4 mb-6">
+            <div
+              class="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-500 text-white font-heading font-bold text-xl flex-shrink-0">
+              4</div>
+            <h3 class="text-xl font-heading font-bold text-primary-800">Suivi proactif 360°</h3>
+          </div>
+          <p class="text-primary-600 mb-4 font-semibold">Un accompagnement continu pour une tranquillité d'esprit totale
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-start gap-2 text-sm text-primary-700">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Alertes automatiques (SMS/email) pour les échéances (déclarations fiscales, loyers, contrats)
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-700">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Mises à jour mensuelles : ajout des nouveaux documents, vérification des complétudes, relances si besoin
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-700">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Coordination avec vos partenaires (avocats du cabinet Schaeffer, experts-comptables) pour un travail
+              synchronisé
+            </li>
+            <li class="flex items-start gap-2 text-sm text-primary-700">
+              <svg class="h-4 w-4 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Bilan annuel avec recommandations pour optimiser votre organisation
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center mt-14 reveal">
+        <a href="tel:+33602043255"
+          class="inline-flex items-center gap-2 rounded-xl bg-accent-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-accent-500/25 hover:bg-accent-600 transition-all duration-200 cursor-pointer pulse-ring">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Commencer par un diagnostic gratuit
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section id="temoignages" class="py-20 sm:py-28 bg-primary-500">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span
+          class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-300 mb-3">Témoignages</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Ils nous font confiance</h2>
+        <p class="text-lg text-primary-200 max-w-2xl mx-auto">Découvrez ce que nos clients disent de notre
+          accompagnement.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <!-- Testimonial 1 -->
+        <div class="reveal rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-8">
+          <div class="flex gap-1 mb-4">
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          <p class="text-white/90 leading-relaxed mb-6">"Ayant rencontré un problème locatif, le Cabinet Fiscal Immo m'a
+            apporté un soutien énorme en agissant en partenariat avec le cabinet Schaeffer Avocats. Grâce à leur
+            intervention, j'ai obtenu gain de cause. Un grand merci à Monsieur Dago ABDELBASSIT pour l'attention et le
+            professionnalisme apportés à mon dossier."</p>
+          <div>
+            <p class="font-semibold text-white">Laura CHAUTEMPS</p>
+            <p class="text-sm text-primary-300">Cliente accompagnée</p>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="reveal rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-8">
+          <div class="flex gap-1 mb-4">
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          <p class="text-white/90 leading-relaxed mb-6">"Merci au Cabinet Fiscal Immo, j'ai récupéré 18 300 euros et
+            gagné du temps l'an dernier. Un vrai soulagement !"</p>
+          <div>
+            <p class="font-semibold text-white">Mary C.</p>
+            <p class="text-sm text-primary-300">Propriétaire</p>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="reveal rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-8">
+          <div class="flex gap-1 mb-4">
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          <p class="text-white/90 leading-relaxed mb-6">"Suite à un désaccord fiscal, je me sentais complètement dépassé
+            par les demandes de l'administration. Le Cabinet Fiscal Immo m'a aidé à reconstituer un dossier clair,
+            organiser l'ensemble de mes justificatifs et structurer ma réponse de manière précise. Leur rigueur et leur
+            méthodologie ont permis de sécuriser ma situation. J'ai également gagné un temps considérable et retrouvé
+            une vraie sérénité. Un accompagnement sérieux, discret et extrêmement professionnel."</p>
+          <div>
+            <p class="font-semibold text-white">Karim B.</p>
+            <p class="text-sm text-primary-300">Dirigeant de société</p>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="reveal rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-8">
+          <div class="flex gap-1 mb-4">
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          <p class="text-white/90 leading-relaxed mb-6">"Avant le Cabinet Fiscal Immo, chaque période fiscale était un
+            cauchemar. Aujourd'hui, tout est prêt avant même que mon comptable ne me le demande. Un vrai soulagement."
+          </p>
+          <div>
+            <p class="font-semibold text-white">Sophie M.</p>
+            <p class="text-sm text-primary-300">Cadre supérieure, 3 biens locatifs</p>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="reveal rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-8">
+          <div class="flex gap-1 mb-4">
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          <p class="text-white/90 leading-relaxed mb-6">"Je gère une SCI et deux LMNP. Le Cabinet m'a fait gagner un
+            temps considérable en structurant tous mes dossiers. Mon avocat et mon notaire sont ravis de la qualité des
+            documents."</p>
+          <div>
+            <p class="font-semibold text-white">Marc L.</p>
+            <p class="text-sm text-primary-300">Investisseur immobilier</p>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="reveal rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-8">
+          <div class="flex gap-1 mb-4">
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          <p class="text-white/90 leading-relaxed mb-6">"En tant que gérante de TPE, je jonglais entre ma vie pro et
+            perso sans jamais retrouver les bons papiers. Maintenant, tout est centralisé et je n'ai plus aucune urgence
+            de dernière minute."</p>
+          <div>
+            <p class="font-semibold text-white">Amina K.</p>
+            <p class="text-sm text-primary-300">Gérante de TPE</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RESEAU AVOCATS ===== -->
+  <section class="py-16 sm:py-20 bg-gradient-to-r from-primary-800 to-primary-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="reveal">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 mb-6">
+            <svg class="h-4 w-4 text-accent-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <span class="text-xs font-semibold tracking-wide text-accent-300 uppercase">Nouveau partenariat</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Un réseau d'avocats expérimentés à vos côtés</h2>
+          <p class="text-primary-200 leading-relaxed text-lg">En complément de notre expertise administrative, nous
+            collaborons désormais avec un <strong class="text-white">réseau d'avocats expérimentés (plus de 20 ans
+              d'expérience)</strong> pour vous offrir un accompagnement juridique solide lorsque votre situation le
+            nécessite.</p>
+        </div>
+        <div class="reveal">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-6">
+              <svg class="h-8 w-8 text-accent-400 mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              <h3 class="font-heading font-bold text-white mb-1">Accompagnement juridique</h3>
+              <p class="text-sm text-primary-300">En complément de notre expertise administrative</p>
+            </div>
+            <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-6">
+              <svg class="h-8 w-8 text-accent-400 mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <h3 class="font-heading font-bold text-white mb-1">+20 ans d'expérience</h3>
+              <p class="text-sm text-primary-300">Des avocats chevronnés et spécialisés</p>
+            </div>
+            <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-6">
+              <svg class="h-8 w-8 text-accent-400 mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              <h3 class="font-heading font-bold text-white mb-1">Coordination simplifiée</h3>
+              <p class="text-sm text-primary-300">Un seul interlocuteur pour tous vos dossiers</p>
+            </div>
+            <div class="rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 p-6">
+              <svg class="h-8 w-8 text-accent-400 mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+              </svg>
+              <h3 class="font-heading font-bold text-white mb-1">Dossiers solides</h3>
+              <p class="text-sm text-primary-300">Administratif + juridique parfaitement articulés</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOG ===== -->
+  <section id="blog" class="py-20 sm:py-28 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-4 reveal">
+        <div>
+          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-500 mb-3">Blog &
+            Conseils</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-primary-900">Nos derniers articles</h2>
+        </div>
+        <a href="blog/index.html"
+          class="inline-flex items-center gap-1 text-sm font-semibold text-accent-500 hover:text-accent-600 transition-colors cursor-pointer">
+          Voir tous les articles
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <!-- Blog 1 -->
+        <a href="blog/declaration-revenus-2026-erreurs.html" class="block">
+          <article
+            class="reveal blog-card group rounded-2xl border border-surface-200 overflow-hidden hover:shadow-lg hover:shadow-primary-900/5 transition-shadow duration-300 cursor-pointer">
+            <div class="overflow-hidden aspect-[16/10]">
+              <div
+                class="blog-img w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 transition-transform duration-500 flex items-center justify-center">
+                <svg class="h-16 w-16 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                </svg>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs font-semibold text-accent-500 uppercase tracking-wide">Fiscalité</span>
+                <span class="text-xs text-primary-400">15 Fév 2026</span>
+              </div>
+              <h3
+                class="text-lg font-heading font-bold text-primary-800 mb-2 group-hover:text-accent-600 transition-colors">
+                Déclaration de revenus 2026 : les 5 erreurs les plus fréquentes</h3>
+              <p class="text-sm text-primary-500 leading-relaxed">Découvrez les pièges classiques qui coûtent cher aux
+                contribuables et comment les éviter facilement avec une bonne organisation.</p>
+            </div>
+          </article>
+        </a>
+
+        <!-- Blog 2 -->
+        <article
+          class="reveal blog-card group rounded-2xl border border-surface-200 overflow-hidden hover:shadow-lg hover:shadow-primary-900/5 transition-shadow duration-300 cursor-pointer">
+          <div class="overflow-hidden aspect-[16/10]">
+            <div
+              class="blog-img w-full h-full bg-gradient-to-br from-accent-50 to-accent-100 transition-transform duration-500 flex items-center justify-center">
+              <svg class="h-16 w-16 text-accent-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs font-semibold text-accent-500 uppercase tracking-wide">Immobilier</span>
+              <span class="text-xs text-primary-400">8 Fév 2026</span>
+            </div>
+            <h3
+              class="text-lg font-heading font-bold text-primary-800 mb-2 group-hover:text-accent-600 transition-colors">
+              LMNP en 2026 : ce qui change pour les investisseurs</h3>
+            <p class="text-sm text-primary-500 leading-relaxed">Le statut LMNP évolue. Voici ce que vous devez savoir
+              pour adapter votre stratégie et vos déclarations cette année.</p>
+          </div>
+        </article>
+
+        <!-- Blog 3 -->
+        <article
+          class="reveal blog-card group rounded-2xl border border-surface-200 overflow-hidden hover:shadow-lg hover:shadow-primary-900/5 transition-shadow duration-300 cursor-pointer">
+          <div class="overflow-hidden aspect-[16/10]">
+            <div
+              class="blog-img w-full h-full bg-gradient-to-br from-primary-50 to-accent-50 transition-transform duration-500 flex items-center justify-center">
+              <svg class="h-16 w-16 text-primary-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs font-semibold text-accent-500 uppercase tracking-wide">Organisation</span>
+              <span class="text-xs text-primary-400">1 Fév 2026</span>
+            </div>
+            <h3
+              class="text-lg font-heading font-bold text-primary-800 mb-2 group-hover:text-accent-600 transition-colors">
+              30 Minutes pour Reprendre le Contrôle de Votre Organisation</h3>
+            <p class="text-sm text-primary-500 leading-relaxed">Notre méthode éprouvée pour classer, trier et archiver
+              efficacement tous vos documents importants. Un guide pratique pas à pas.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT / CTA FINAL ===== -->
+  <section id="contact" class="py-20 sm:py-28 bg-surface-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <!-- Left: Info -->
+        <div class="reveal">
+          <span
+            class="inline-block text-xs font-semibold tracking-widest uppercase text-accent-500 mb-3">Contactez-nous</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-primary-900 mb-4">Prêt à reprendre le contrôle de vos dossiers
+            ?</h2>
+          <p class="text-lg text-primary-500 leading-relaxed mb-8">Premier échange gratuit et sans engagement.
+            Appelez-nous ou remplissez le formulaire, nous vous recontactons sous 24h.</p>
+
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 flex-shrink-0">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-primary-800">Téléphone</p>
+                <a href="tel:+33602043255"
+                  class="text-accent-500 hover:text-accent-600 transition-colors cursor-pointer">06 02 04 32 55</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 flex-shrink-0">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-primary-800">Email</p>
+                <a href="mailto:contact@cabinetfiscalimmo.fr"
+                  class="text-accent-500 hover:text-accent-600 transition-colors cursor-pointer">contact@cabinetfiscalimmo.fr</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 flex-shrink-0">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-primary-800">Adresse</p>
+                <p class="text-primary-500">Paris & Île-de-France<br>Consultations sur rendez-vous</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="reveal">
+          <form action="https://formsubmit.co/contact@cabinetfiscalimmo.fr" method="POST" id="contact-form"
+            class="rounded-2xl bg-white border border-surface-200 shadow-lg shadow-primary-900/5 p-8">
+            <h3 class="text-xl font-heading font-bold text-primary-800 mb-6">Demander un rappel gratuit</h3>
+
+            <!-- FormSubmit honeypot & settings -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" style="display:none">
+
+            <div class="space-y-5">
+              <div>
+                <label for="name" class="block text-sm font-semibold text-primary-700 mb-1.5">Nom complet</label>
+                <input type="text" id="name" name="name" required placeholder="Votre nom et prénom"
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 placeholder:text-primary-400 focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-accent-500 outline-none transition-all">
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-semibold text-primary-700 mb-1.5">Email</label>
+                <input type="email" id="email" name="email" required placeholder="votre@email.com"
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 placeholder:text-primary-400 focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-accent-500 outline-none transition-all">
+              </div>
+
+              <div>
+                <label for="phone" class="block text-sm font-semibold text-primary-700 mb-1.5">Téléphone</label>
+                <input type="tel" id="phone" name="phone" required placeholder="06 02 04 32 55"
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 placeholder:text-primary-400 focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-accent-500 outline-none transition-all">
+              </div>
+
+              <div>
+                <label for="subject" class="block text-sm font-semibold text-primary-700 mb-1.5">Votre situation</label>
+                <select id="subject" name="subject" required
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-accent-500 outline-none transition-all cursor-pointer">
+                  <option value="" disabled selected>Choisissez une option</option>
+                  <option value="particulier">Particulier imposé</option>
+                  <option value="investisseur">Investisseur immobilier</option>
+                  <option value="dirigeant">Dirigeant TPE/PME</option>
+                  <option value="sci">Gérant de SCI</option>
+                  <option value="autre">Autre situation</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-semibold text-primary-700 mb-1.5">Message <span
+                    class="font-normal text-primary-400">(optionnel)</span></label>
+                <textarea id="message" name="message" rows="3" placeholder="Décrivez brièvement votre besoin..."
+                  class="w-full rounded-xl border border-surface-200 bg-surface-50 px-4 py-3 text-sm text-primary-800 placeholder:text-primary-400 focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:border-accent-500 outline-none transition-all resize-none"></textarea>
+              </div>
+
+              <button type="submit"
+                class="w-full flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-6 py-3.5 text-base font-semibold text-white hover:bg-accent-600 shadow-lg shadow-accent-500/20 transition-all duration-200 cursor-pointer">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                Demander un rappel gratuit
+              </button>
+
+              <p class="text-xs text-center text-primary-400 mt-2">Nous vous recontactons sous 24h. Aucun engagement.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-primary-900 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <div class="mb-4">
+            <img src="assets/img/logo.png" alt="Cabinet Fiscal Immo" class="h-20 w-auto"
+             >
+          </div>
+          <p class="text-primary-400 text-sm leading-relaxed max-w-md">Nous accompagnons particuliers, investisseurs et
+            dirigeants dans la préparation, l'organisation et le suivi de tous leurs dossiers fiscaux, immobiliers et
+            administratifs.</p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Services</h4>
+          <ul class="space-y-2.5">
+            <li><a href="services/fiscal.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Fiscalité</a>
+            </li>
+            <li><a href="services/immobilier.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Immobilier</a>
+            </li>
+            <li><a href="services/affaires.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Affaires</a>
+            </li>
+            <li><a href="blog/index.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Blog</a></li>
+            <li><a href="contact.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Informations</h4>
+          <ul class="space-y-2.5">
+            <li><a href="mentions-legales.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Mentions
+                légales</a></li>
+            <li><a href="politique-confidentialite.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Politique de
+                confidentialité</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-primary-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-primary-500">&copy; 2025 Cabinet Fiscal Immo. Tous droits réservés.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-primary-500 hover:text-accent-400 transition-colors cursor-pointer"
+            aria-label="LinkedIn">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+          <a href="#" class="text-primary-500 hover:text-accent-400 transition-colors cursor-pointer"
+            aria-label="Instagram">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+            </svg>
+          </a>
+          <a href="#" class="text-primary-500 hover:text-accent-400 transition-colors cursor-pointer"
+            aria-label="Facebook">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== FLOATING CTA (Mobile) ===== -->
+  <div class="fixed bottom-6 right-6 z-50 md:hidden">
+    <a href="tel:+33602043255"
+      class="flex h-14 w-14 items-center justify-center rounded-full bg-accent-500 text-white shadow-xl shadow-accent-500/30 hover:bg-accent-600 transition-colors cursor-pointer pulse-ring"
+      aria-label="Appeler le Cabinet Fiscal Immo">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path
+          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      mobileBtn.setAttribute('aria-expanded', !isOpen);
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Counter animation
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+
+          if (prefersReducedMotion) {
+            el.textContent = target + suffix;
+            return;
+          }
+
+          let current = 0;
+          const step = target / 60;
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              el.textContent = target + suffix;
+              clearInterval(timer);
+            } else {
+              el.textContent = Math.floor(current) + suffix;
+            }
+          }, 25);
+
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(el => counterObserver.observe(el));
+
+    // Form submission with FormSubmit
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<svg class="animate-spin h-5 w-5" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>';
+
+      fetch("https://formsubmit.co/ajax/contact@cabinetfiscalimmo.fr", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: e.target.name.value,
+          email: e.target.email.value,
+          phone: e.target.phone.value,
+          subject: e.target.subject.value,
+          message: e.target.message.value
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          btn.innerHTML = '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Demande envoyée !';
+          btn.classList.remove('bg-accent-500', 'hover:bg-accent-600');
+          btn.classList.add('bg-green-500');
+
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.classList.remove('bg-green-500');
+            btn.classList.add('bg-accent-500', 'hover:bg-accent-600');
+            e.target.reset();
+          }, 3000);
+        })
+        .catch(error => {
+          btn.innerHTML = 'Erreur. Réessayez.';
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+          }, 3000);
+        });
+    });
+  </script>
+  <!-- Cookie Banner -->
+  <div id="cookie-banner"
+    class="fixed bottom-0 left-0 right-0 z-[100] bg-primary-900 border-t border-primary-800 p-4 transform translate-y-full transition-transform duration-500 flex flex-col sm:flex-row items-center justify-center gap-4 shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
+    <p class="text-sm text-primary-200 text-center sm:text-left max-w-3xl">
+      Cabinet Fiscal Immo utilise des cookies pour assurer le bon fonctionnement du site et réaliser des statistiques de
+      visites.
+      <a href="politique-confidentialite.html" class="text-accent-400 hover:text-accent-300 underline font-medium">En
+        savoir plus</a>.
+    </p>
+    <div class="flex gap-3 flex-shrink-0">
+      <button id="cookie-refuse"
+        class="px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 rounded-xl transition-colors border border-primary-700">Refuser</button>
+      <button id="cookie-accept"
+        class="px-5 py-2.5 text-sm font-semibold text-white bg-accent-500 hover:bg-accent-600 rounded-xl transition-colors shadow-lg shadow-accent-500/20">Accepter</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const banner = document.getElementById('cookie-banner');
+      if (!localStorage.getItem('cookie_consent')) {
+        setTimeout(() => banner.classList.remove('translate-y-full'), 1000);
+      }
+      document.getElementById('cookie-accept').addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'accepted');
+        banner.classList.add('translate-y-full');
+      });
+      document.getElementById('cookie-refuse').addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'refused');
+        banner.classList.add('translate-y-full');
+      });
+    });
+  </script>
+
+</body>
+
+</html>

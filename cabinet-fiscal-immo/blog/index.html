@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/img/logo.png">
+  <title>Blog — Cabinet Fiscal Immo | Conseils Fiscalité, Immobilier & Organisation</title>
+  <meta name="description"
+    content="Retrouvez nos articles et conseils sur la fiscalité, l'immobilier, l'investissement locatif, la gestion administrative et l'organisation de vos dossiers.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#EFF6FF', 100: '#DBEAFE', 200: '#BFDBFE', 300: '#93C5FD',
+              400: '#60A5FA', 500: '#1E5F8C', 600: '#1A5179', 700: '#164466',
+              800: '#0F2E45', 900: '#0A1F30',
+            },
+            accent: {
+              50: '#FFF7ED', 100: '#FFEDD5', 200: '#FED7AA', 300: '#FDBA74',
+              400: '#F59E0B', 500: '#E8850A', 600: '#D97706', 700: '#B45309',
+              800: '#92400E', 900: '#78350F',
+            },
+            surface: { 50: '#F8FAFC', 100: '#F1F5F9', 200: '#E2E8F0' }
+          },
+          fontFamily: {
+            heading: ['Lexend', 'sans-serif'],
+            body: ['Source Sans 3', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Lexend', sans-serif;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    .nav-glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-glass.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .blog-card:hover .blog-img {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body class="bg-white text-primary-800 antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar"
+    class="nav-glass fixed top-4 left-4 right-4 z-50 rounded-2xl border border-surface-200 px-4 sm:px-6 lg:px-8 py-3 transition-shadow duration-300">
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-3 cursor-pointer" aria-label="Accueil Cabinet Fiscal Immo">
+        <img src="../assets/img/logo.png" alt="Cabinet Fiscal Immo" class="h-10 w-auto">
+      </a>
+      <div class="hidden md:flex items-center gap-6">
+        <div class="relative group">
+          <button class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer flex items-center gap-1">
+            Services
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 absolute top-full left-0 mt-2 w-52 bg-white rounded-xl border border-surface-200 shadow-xl shadow-primary-900/10 py-2 z-50">
+            <a href="../services/fiscal.html" class="block px-4 py-2.5 text-sm text-primary-700 hover:bg-surface-50 hover:text-accent-500 transition-colors cursor-pointer">Fiscalité</a>
+            <a href="../services/immobilier.html" class="block px-4 py-2.5 text-sm text-primary-700 hover:bg-surface-50 hover:text-accent-500 transition-colors cursor-pointer">Immobilier</a>
+            <a href="../services/affaires.html" class="block px-4 py-2.5 text-sm text-primary-700 hover:bg-surface-50 hover:text-accent-500 transition-colors cursor-pointer">Affaires</a>
+          </div>
+        </div>
+        <a href="../index.html#methode"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors cursor-pointer">Méthode</a>
+        <a href="index.html" class="text-sm font-semibold text-accent-500 cursor-pointer">Blog</a>
+        <a href="../contact.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors cursor-pointer">Contact</a>
+      </div>
+      <a href="tel:+33602043255"
+        class="hidden md:inline-flex items-center gap-2 rounded-xl bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-accent-500/20 hover:bg-accent-600 transition-colors cursor-pointer">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+        Prendre RDV
+      </a>
+      <button id="mobile-menu-btn"
+        class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-surface-100 transition-colors cursor-pointer"
+        aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg class="h-6 w-6 text-primary-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-surface-200 pt-4">
+      <div class="flex flex-col gap-3">
+        <span class="text-xs font-semibold text-primary-400 uppercase tracking-wider px-2 pt-1">Services</span>
+        <a href="../services/fiscal.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-4 py-1.5 cursor-pointer">Fiscalité</a>
+        <a href="../services/immobilier.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-4 py-1.5 cursor-pointer">Immobilier</a>
+        <a href="../services/affaires.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-4 py-1.5 cursor-pointer">Affaires</a>
+        <div class="border-t border-surface-200 my-1"></div>
+        <a href="index.html"
+          class="mobile-link text-sm font-semibold text-accent-500 px-2 py-1.5 cursor-pointer">Blog</a>
+        <a href="../contact.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Contact</a>
+        <a href="tel:+33602043255"
+          class="mt-2 flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white cursor-pointer">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Prendre RDV
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== BLOG HEADER ===== -->
+  <section class="pt-32 pb-12 sm:pt-40 sm:pb-16 bg-gradient-to-br from-primary-50 via-white to-surface-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal">
+        <a href="../index.html"
+          class="inline-flex items-center gap-1 text-sm text-primary-500 hover:text-accent-500 transition-colors cursor-pointer mb-6">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+          Retour à l'accueil
+        </a>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-900 mb-4">Blog & Conseils</h1>
+        <p class="text-lg text-primary-500 max-w-2xl">Fiscalité, immobilier, organisation administrative : retrouvez nos
+          articles pour mieux comprendre et mieux gérer vos dossiers.</p>
+      </div>
+
+      <!-- Category filters -->
+      <div class="mt-8 flex flex-wrap gap-3 reveal">
+        <button
+          class="blog-filter active-filter rounded-full px-5 py-2 text-sm font-medium bg-primary-500 text-white cursor-pointer transition-colors"
+          data-filter="all">Tous</button>
+        <button
+          class="blog-filter rounded-full px-5 py-2 text-sm font-medium bg-surface-100 text-primary-600 hover:bg-primary-100 cursor-pointer transition-colors"
+          data-filter="fiscalite">Fiscalité</button>
+        <button
+          class="blog-filter rounded-full px-5 py-2 text-sm font-medium bg-surface-100 text-primary-600 hover:bg-primary-100 cursor-pointer transition-colors"
+          data-filter="immobilier">Immobilier</button>
+        <button
+          class="blog-filter rounded-full px-5 py-2 text-sm font-medium bg-surface-100 text-primary-600 hover:bg-primary-100 cursor-pointer transition-colors"
+          data-filter="organisation">Organisation</button>
+        <button
+          class="blog-filter rounded-full px-5 py-2 text-sm font-medium bg-surface-100 text-primary-600 hover:bg-primary-100 cursor-pointer transition-colors"
+          data-filter="entreprise">Entreprise</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOG GRID ===== -->
+  <section class="py-12 sm:py-16 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div id="blog-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <!-- Articles chargés dynamiquement depuis content/blog/manifest.json -->
+        <div id="blog-loading" class="col-span-3 flex justify-center py-16">
+          <div class="flex flex-col items-center gap-3 text-primary-400">
+            <svg class="h-8 w-8 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+            </svg>
+            <span class="text-sm">Chargement des articles…</span>
+          </div>
+        </div>
+      </div>
+      <!-- Empty state -->
+      <div id="blog-empty" class="hidden text-center py-16">
+        <svg class="h-16 w-16 text-primary-300 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+        </svg>
+        <p class="text-lg text-primary-500">Aucun article dans cette catégorie pour le moment.</p>
+        <p class="text-sm text-primary-400 mt-1">Revenez bientôt !</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="py-16 bg-primary-500">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center reveal">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Besoin d'un accompagnement personnalisé ?</h2>
+      <p class="text-primary-200 text-lg mb-8 max-w-2xl mx-auto">Chaque situation est unique. Échangeons lors d'un appel
+        gratuit pour faire le point sur vos besoins.</p>
+      <a href="tel:+33602043255"
+        class="inline-flex items-center gap-2 rounded-xl bg-accent-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-accent-500/25 hover:bg-accent-600 transition-all duration-200 cursor-pointer">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+        Appeler le 06 02 04 32 55
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-primary-900 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-500 text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </div>
+          <span class="font-heading text-sm font-bold text-white">Cabinet Fiscal Immo</span>
+        </div>
+        <p class="text-xs text-primary-500">&copy; 2025 Cabinet Fiscal Immo. Tous droits réservés.</p>
+        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4 mt-4 sm:mt-0">
+          <a href="../mentions-legales.html"
+            class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Mentions légales</a>
+          <a href="../politique-confidentialite.html"
+            class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Confidentialité</a>
+          <a href="../index.html"
+            class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Accueil</a>
+          <a href="../index.html#contact"
+            class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile CTA -->
+  <div class="fixed bottom-6 right-6 z-50 md:hidden">
+    <a href="tel:+33602043255"
+      class="flex h-14 w-14 items-center justify-center rounded-full bg-accent-500 text-white shadow-xl shadow-accent-500/30 cursor-pointer"
+      aria-label="Appeler">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path
+          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 20); });
+
+    // Mobile menu
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileBtn.setAttribute('aria-expanded', !mobileMenu.classList.contains('hidden'));
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); mobileBtn.setAttribute('aria-expanded', 'false'); });
+    });
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ─── Blog category filter ────────────────────────────────────────────────
+    let currentFilter = 'all';
+
+    function applyFilter(filter) {
+      currentFilter = filter;
+      const articles = document.querySelectorAll('#blog-grid article');
+      let visible = 0;
+      articles.forEach(a => {
+        const show = filter === 'all' || a.dataset.category === filter;
+        a.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      document.getElementById('blog-empty').classList.toggle('hidden', visible > 0);
+    }
+
+    document.querySelectorAll('.blog-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.blog-filter').forEach(b => {
+          b.classList.remove('bg-primary-500', 'text-white');
+          b.classList.add('bg-surface-100', 'text-primary-600');
+        });
+        btn.classList.remove('bg-surface-100', 'text-primary-600');
+        btn.classList.add('bg-primary-500', 'text-white');
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    // ─── Dynamic blog loading from manifest.json ────────────────────────────
+    const CAT_LABELS = {
+      fiscalite: 'Fiscalité', immobilier: 'Immobilier',
+      organisation: 'Organisation', entreprise: 'Entreprise'
+    };
+    const CAT_GRADIENTS = {
+      fiscalite: 'from-primary-100 to-primary-200',
+      immobilier: 'from-accent-50 to-accent-100',
+      organisation: 'from-primary-50 to-accent-50',
+      entreprise: 'from-surface-100 to-primary-50',
+    };
+    const CAT_ICON_COLOR = {
+      fiscalite: 'text-primary-400', immobilier: 'text-accent-300',
+      organisation: 'text-primary-300', entreprise: 'text-primary-400',
+    };
+    const CAT_ICONS = {
+      fiscalite: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+      immobilier: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+      organisation: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+      entreprise: '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+    };
+
+    function buildCard(post) {
+      const cat = post.category || (post.tags && post.tags[0]) || 'fiscalite';
+      const catLabel = CAT_LABELS[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
+      const url = post.url || (post.slug + '.html');
+      const date = new Date(post.date);
+      const dateFr = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+
+      const imageHTML = post.image
+        ? `<div class="overflow-hidden aspect-[16/10]">
+            <img src="${post.image}" alt="${post.title.replace(/"/g, '&quot;')}" class="blog-img w-full h-full object-cover transition-transform duration-500">
+          </div>`
+        : `<div class="overflow-hidden aspect-[16/10]">
+            <div class="blog-img w-full h-full bg-gradient-to-br ${CAT_GRADIENTS[cat] || CAT_GRADIENTS.fiscalite} transition-transform duration-500 flex items-center justify-center">
+              <svg class="h-16 w-16 ${CAT_ICON_COLOR[cat] || CAT_ICON_COLOR.fiscalite}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                ${CAT_ICONS[cat] || CAT_ICONS.fiscalite}
+              </svg>
+            </div>
+          </div>`;
+
+      const article = document.createElement('article');
+      article.className = 'reveal blog-card group rounded-2xl border border-surface-200 overflow-hidden hover:shadow-lg hover:shadow-primary-900/5 transition-shadow duration-300';
+      article.dataset.category = cat;
+      article.innerHTML = `
+        <a href="${url}" class="block cursor-pointer">
+          ${imageHTML}
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs font-semibold text-accent-500 uppercase tracking-wide">${catLabel}</span>
+              <span class="text-xs text-primary-400">${dateFr}</span>
+            </div>
+            <h2 class="text-lg font-heading font-bold text-primary-800 mb-2 group-hover:text-accent-600 transition-colors">${post.title}</h2>
+            <p class="text-sm text-primary-500 leading-relaxed">${post.description}</p>
+          </div>
+        </a>`;
+      return article;
+    }
+
+    async function loadBlog() {
+      const grid = document.getElementById('blog-grid');
+      try {
+        const res = await fetch('../content/blog/manifest.json');
+        if (!res.ok) throw new Error('manifest not found');
+        const posts = await res.json();
+
+        // Remove loading spinner
+        grid.innerHTML = '';
+
+        if (!posts.length) {
+          document.getElementById('blog-empty').classList.remove('hidden');
+          return;
+        }
+
+        posts.forEach(post => {
+          const card = buildCard(post);
+          grid.appendChild(card);
+          revealObserver.observe(card);
+        });
+
+        // Re-apply current filter after loading
+        if (currentFilter !== 'all') applyFilter(currentFilter);
+
+      } catch (e) {
+        grid.innerHTML = '';
+        document.getElementById('blog-empty').classList.remove('hidden');
+        console.warn('Blog manifest load failed:', e);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadBlog);
+  </script>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner"
+    class="fixed bottom-0 left-0 right-0 z-[100] bg-primary-900 border-t border-primary-800 p-4 transform translate-y-full transition-transform duration-500 flex flex-col sm:flex-row items-center justify-center gap-4 shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
+    <p class="text-sm text-primary-200 text-center sm:text-left max-w-3xl">
+      Cabinet Fiscal Immo utilise des cookies pour assurer le bon fonctionnement du site et réaliser des statistiques de
+      visites.
+      <a href="../politique-confidentialite.html" class="text-accent-400 hover:text-accent-300 underline font-medium">En
+        savoir plus</a>.
+    </p>
+    <div class="flex gap-3 flex-shrink-0">
+      <button id="cookie-refuse"
+        class="px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 rounded-xl transition-colors border border-primary-700">Refuser</button>
+      <button id="cookie-accept"
+        class="px-5 py-2.5 text-sm font-semibold text-white bg-accent-500 hover:bg-accent-600 rounded-xl transition-colors shadow-lg shadow-accent-500/20">Accepter</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const banner = document.getElementById('cookie-banner');
+      if (!localStorage.getItem('cookie_consent')) {
+        setTimeout(() => banner.classList.remove('translate-y-full'), 1000);
+      }
+      document.getElementById('cookie-accept').addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'accepted');
+        banner.classList.add('translate-y-full');
+      });
+      document.getElementById('cookie-refuse').addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'refused');
+        banner.classList.add('translate-y-full');
+      });
+    });
+  </script>
+
+</body>
+
+</html>

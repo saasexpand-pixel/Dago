@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/img/logo.png">
+  <title>Fiscalit&eacute; &mdash; Cabinet Fiscal Immo | Particuliers &amp; Professionnels</title>
+  <meta name="description"
+    content="Accompagnement administratif complet en fiscalit&eacute; : d&eacute;clarations, optimisation, contr&ocirc;les, URSSAF. Cabinet Fiscal Immo accompagne particuliers et professionnels.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#EFF6FF',
+              100: '#DBEAFE',
+              200: '#BFDBFE',
+              300: '#93C5FD',
+              400: '#60A5FA',
+              500: '#1E5F8C',
+              600: '#1A5179',
+              700: '#164466',
+              800: '#0F2E45',
+              900: '#0A1F30',
+            },
+            accent: {
+              50: '#FFF7ED',
+              100: '#FFEDD5',
+              200: '#FED7AA',
+              300: '#FDBA74',
+              400: '#F59E0B',
+              500: '#E8850A',
+              600: '#D97706',
+              700: '#B45309',
+              800: '#92400E',
+              900: '#78350F',
+            },
+            surface: {
+              50: '#F8FAFC',
+              100: '#F1F5F9',
+              200: '#E2E8F0',
+            }
+          },
+          fontFamily: {
+            heading: ['Lexend', 'sans-serif'],
+            body: ['Source Sans 3', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Lexend', sans-serif;
+    }
+
+    /* Smooth reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .pulse-ring {
+        animation: none;
+      }
+    }
+
+    /* Floating navbar glassmorphism */
+    .nav-glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-glass.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* CTA pulse */
+    .pulse-ring {
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(232, 133, 10, 0.4); }
+      70% { box-shadow: 0 0 0 12px rgba(232, 133, 10, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(232, 133, 10, 0); }
+    }
+
+    /* Accordion */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .accordion-content.open {
+      max-height: 600px;
+      padding-top: 1rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .accordion-chevron {
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-chevron.rotate {
+      transform: rotate(180deg);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .accordion-content {
+        transition: none;
+      }
+
+      .accordion-chevron {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-white text-primary-800 antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar"
+    class="nav-glass fixed top-4 left-4 right-4 z-50 rounded-2xl border border-surface-200 px-4 sm:px-6 lg:px-8 py-3 transition-shadow duration-300">
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+      <!-- Logo -->
+      <a href="../index.html" class="flex items-center gap-3 cursor-pointer" aria-label="Accueil Cabinet Fiscal Immo">
+        <img src="../assets/img/logo.png" alt="Cabinet Fiscal Immo" class="h-10 w-auto">
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="../index.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Accueil</a>
+        <a href="fiscal.html"
+          class="text-sm font-semibold text-accent-500 transition-colors duration-200 cursor-pointer">Fiscal</a>
+        <a href="immobilier.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Immobilier</a>
+        <a href="affaires.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Affaires</a>
+        <a href="../blog/index.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Blog</a>
+        <a href="../contact.html"
+          class="text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors duration-200 cursor-pointer">Contact</a>
+      </div>
+
+      <!-- CTA Button -->
+      <a href="tel:+33602043255"
+        class="hidden md:inline-flex items-center gap-2 rounded-xl bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-accent-500/20 hover:bg-accent-600 transition-colors duration-200 cursor-pointer pulse-ring">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+        Prendre RDV
+      </a>
+
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn"
+        class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-surface-100 transition-colors cursor-pointer"
+        aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg class="h-6 w-6 text-primary-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-surface-200 pt-4">
+      <div class="flex flex-col gap-3">
+        <a href="../index.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Accueil</a>
+        <a href="fiscal.html"
+          class="mobile-link text-sm font-semibold text-accent-500 px-2 py-1.5 cursor-pointer">Fiscal</a>
+        <a href="immobilier.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Immobilier</a>
+        <a href="affaires.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Affaires</a>
+        <a href="../blog/index.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Blog</a>
+        <a href="../contact.html"
+          class="mobile-link text-sm font-medium text-primary-700 hover:text-accent-500 transition-colors px-2 py-1.5 cursor-pointer">Contact</a>
+        <a href="tel:+33602043255"
+          class="mt-2 flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white cursor-pointer">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Prendre RDV
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-surface-50 pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <!-- Decorative shapes -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-accent-100 rounded-full opacity-30 blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-primary-100 rounded-full opacity-40 blur-3xl translate-y-1/3 -translate-x-1/4"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal">
+        <!-- Breadcrumb -->
+        <nav aria-label="Fil d'Ariane" class="mb-8">
+          <ol class="flex items-center gap-2 text-sm text-primary-500">
+            <li><a href="../index.html" class="hover:text-accent-500 transition-colors cursor-pointer">Accueil</a></li>
+            <li>
+              <svg class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </li>
+            <li class="font-semibold text-primary-800">Fiscalit&eacute;</li>
+          </ol>
+        </nav>
+
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-1.5 mb-6">
+          <div class="h-2 w-2 rounded-full bg-accent-500"></div>
+          <span class="text-xs font-semibold tracking-wide text-primary-700 uppercase">P&ocirc;le Fiscal</span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-900 leading-tight mb-6">
+          Fiscalit&eacute; &mdash; Particuliers<br class="hidden sm:block"> &amp; Professionnels
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg sm:text-xl text-primary-600 max-w-3xl leading-relaxed mb-10">
+          Un accompagnement administratif complet pour s&eacute;curiser vos d&eacute;clarations et vos &eacute;changes avec l&rsquo;administration fiscale.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="tel:+33602043255"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-accent-500/20 hover:bg-accent-600 transition-colors duration-200 cursor-pointer pulse-ring">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            R&eacute;server un appel gratuit
+          </a>
+          <a href="#prestations"
+            class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-primary-200 px-7 py-3.5 text-base font-semibold text-primary-700 hover:bg-primary-50 transition-colors duration-200 cursor-pointer">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <polyline points="19 12 12 19 5 12" />
+            </svg>
+            D&eacute;couvrir nos prestations
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OVERVIEW SECTION ===== -->
+  <section id="prestations" class="py-20 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal max-w-3xl mb-16">
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-primary-900 mb-6">Ce que nous faisons pour vous</h2>
+        <p class="text-lg text-primary-600 leading-relaxed">
+          Le <strong class="text-primary-800">CABINET FISCAL IMMO SOLUTIONS EN GESTION</strong> vous accompagne dans la gestion administrative et documentaire de votre fiscalit&eacute;. Notre r&ocirc;le : transformer vos documents en dossiers clairs, coh&eacute;rents et pr&ecirc;ts &agrave; d&eacute;clarer.
+        </p>
+      </div>
+
+      <!-- Value props grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+        <!-- Prop 1 -->
+        <div class="group rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-lg hover:border-accent-200 transition-all duration-300 cursor-pointer">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-4 group-hover:bg-accent-50 group-hover:text-accent-500 transition-colors duration-300">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-base font-semibold text-primary-800 mb-2">Structurer vos informations</h3>
+          <p class="text-sm text-primary-600 leading-relaxed">Organiser et classifier l&rsquo;ensemble de vos documents pour une lisibilit&eacute; optimale.</p>
+        </div>
+
+        <!-- Prop 2 -->
+        <div class="group rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-lg hover:border-accent-200 transition-all duration-300 cursor-pointer">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-4 group-hover:bg-accent-50 group-hover:text-accent-500 transition-colors duration-300">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-base font-semibold text-primary-800 mb-2">S&eacute;curiser vos d&eacute;marches</h3>
+          <p class="text-sm text-primary-600 leading-relaxed">Pr&eacute;parer des dossiers complets et conformes pour vos &eacute;changes administratifs.</p>
+        </div>
+
+        <!-- Prop 3 -->
+        <div class="group rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-lg hover:border-accent-200 transition-all duration-300 cursor-pointer">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-4 group-hover:bg-accent-50 group-hover:text-accent-500 transition-colors duration-300">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-base font-semibold text-primary-800 mb-2">Vous faire gagner du temps</h3>
+          <p class="text-sm text-primary-600 leading-relaxed">Prendre en charge la collecte et la mise en forme pour vous lib&eacute;rer de la charge administrative.</p>
+        </div>
+
+        <!-- Prop 4 -->
+        <div class="group rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-lg hover:border-accent-200 transition-all duration-300 cursor-pointer">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-4 group-hover:bg-accent-50 group-hover:text-accent-500 transition-colors duration-300">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-base font-semibold text-primary-800 mb-2">Fiabiliser vos &eacute;changes</h3>
+          <p class="text-sm text-primary-600 leading-relaxed">Garantir la coh&eacute;rence et la compl&eacute;tude de vos transmissions &agrave; l&rsquo;administration.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES PARTICULIERS ===== -->
+  <section class="py-20 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <div class="inline-flex items-center gap-2 rounded-full bg-accent-50 px-4 py-1.5 mb-4">
+          <svg class="h-4 w-4 text-accent-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span class="text-xs font-semibold tracking-wide text-accent-700 uppercase">Particuliers</span>
+        </div>
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-primary-900 mb-4">Fiscalit&eacute; des Particuliers</h2>
+        <p class="text-lg text-primary-600 max-w-2xl mx-auto">Un accompagnement sur mesure pour toutes vos d&eacute;marches fiscales personnelles.</p>
+      </div>
+
+      <!-- Service cards grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Card 3.1 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">D&eacute;clarations fiscales &amp; suivi annuel</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Recenser et organiser tous vos justificatifs
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Pr&eacute;parer un dossier complet pour vos d&eacute;clarations
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mettre en place un suivi annuel
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 3.2 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">Optimisation fiscale courante</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Identifier les d&eacute;penses ouvrant droit &agrave; r&eacute;duction
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Rassembler et structurer les preuves
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mettre en forme un r&eacute;capitulatif clair
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 3.3 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">Contr&ocirc;les, courriers &amp; r&eacute;gularisations</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Relire mat&eacute;riellement les courriers re&ccedil;us
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Constituer un dossier de r&eacute;ponse
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Pr&eacute;parer des courriers factuels de r&eacute;ponse
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Organiser le classement et l&rsquo;archivage
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 3.4 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">Accompagnement des revenus immobiliers (fonciers, LMNP)</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Centraliser et classer les documents li&eacute;s aux biens
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              &Eacute;laborer des tableaux de synth&egrave;se
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Pr&eacute;parer un dossier complet par bien immobilier
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 3.5 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">Situation internationale des particuliers</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Identifier et rassembler les documents li&eacute;s &agrave; l&rsquo;&eacute;tranger
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mettre en forme une pr&eacute;sentation factuelle
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Pr&eacute;parer un dossier complet pour l&rsquo;administration
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 3.6: Transmission & succession -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-2">Transmission & succession</h3>
+          <p class="text-sm text-primary-500 mb-4">Anticipation et organisation de la transmission de votre patrimoine (dons, successions, assurance-vie) pour sécuriser vos proches.</p>
+          <p class="text-sm text-primary-600 mb-4">Nous recensons vos biens (immobilier, actifs financiers, participations, assurance-vie), centralisons les justificatifs (titres, statuts, relevés, contrats familiaux) et constituons des dossiers clairs par personne, par bien et par opération.</p>
+          <p class="text-xs font-semibold text-primary-700 uppercase tracking-wide mb-3">Nous intervenons comme support administratif :</p>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Préparation des dossiers de donations et de successions (pièces, tableaux de synthèse, suivi des échanges)
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Organisation des contrats d'assurance-vie et des informations sur les bénéficiaires
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mise en forme des éléments relatifs à votre situation familiale et patrimoniale pour faciliter la protection de vos proches
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES PROFESSIONNELS ===== -->
+  <section class="py-20 bg-surface-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <div class="inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-1.5 mb-4">
+          <svg class="h-4 w-4 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+          </svg>
+          <span class="text-xs font-semibold tracking-wide text-primary-700 uppercase">Professionnels &amp; Entreprises</span>
+        </div>
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-primary-900 mb-4">Fiscalit&eacute; des Professionnels &amp; Entreprises</h2>
+        <p class="text-lg text-primary-600 max-w-2xl mx-auto">Des solutions administratives adapt&eacute;es aux besoins des entrepreneurs, dirigeants et soci&eacute;t&eacute;s.</p>
+      </div>
+
+      <!-- Service cards grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Card 4.1 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="8.5" cy="7" r="4" />
+              <line x1="20" y1="8" x2="20" y2="14" />
+              <line x1="23" y1="11" x2="17" y2="11" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">Formalit&eacute;s de cr&eacute;ation d&rsquo;entreprise</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Recenser les &eacute;l&eacute;ments de base
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Remplir mat&eacute;riellement les formulaires
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Pr&eacute;parer un dossier de cr&eacute;ation complet
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mettre en place un classement de d&eacute;part
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 4.2 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">D&eacute;clarations fiscales des entreprises (BIC, BNC, IS, TVA)</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Centraliser les pi&egrave;ces n&eacute;cessaires
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Pr&eacute;parer des tableaux de synth&egrave;se
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Aider &agrave; la saisie mat&eacute;rielle des donn&eacute;es
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mettre en place une organisation documentaire annuelle
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 4.3 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">Organisation administrative &amp; suivi des obligations</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              &Eacute;tablir un calendrier personnalis&eacute;
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mettre en place des outils de suivi simples
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Organiser un archivage logique par ann&eacute;e et par imp&ocirc;t
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 4.4 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">Assistance en cas de contr&ocirc;le ou de demande</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Relire factuellement les notifications et courriers
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Rassembler et classer les justificatifs n&eacute;cessaires
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Pr&eacute;parer un dossier num&eacute;rot&eacute; et structur&eacute;
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              R&eacute;diger des courriers factuels de transmission
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 4.5 -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-4">Accompagnement administratif des dirigeants</h3>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Distinguer et classer les documents relatifs &agrave; r&eacute;mun&eacute;ration, dividendes, frais
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Pr&eacute;parer des dossiers annuels &laquo;&nbsp;dirigeant&nbsp;&raquo;
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Mettre en forme des tableaux de synth&egrave;se
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 4.7: Gestion et suivi des contrats -->
+        <div class="reveal rounded-2xl border border-surface-200 bg-white p-6 hover:shadow-xl hover:border-accent-200 transition-all duration-300 flex flex-col">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent-500 mb-5">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-primary-800 mb-2">Gestion et suivi de vos contrats</h3>
+          <p class="text-sm text-primary-500 mb-4">Centralisation et suivi administratif de vos principaux contrats professionnels pour rendre vos engagements plus lisibles, traçables et maîtrisés.</p>
+          <ul class="space-y-3 flex-1">
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Recenser et centraliser l'ensemble de vos contrats et avenants dans un suivi unique
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Relever et structurer les informations clés (durée, renouvellement, préavis, engagements chiffrés)
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Organiser le suivi des échéances à l'aide de tableaux et calendriers de suivi
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Archivage structuré et sécurisé, accessible par client, fournisseur, entité ou site
+            </li>
+            <li class="flex items-start gap-3 text-sm text-primary-600">
+              <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Alertes et rappels pour les dates clés (préavis, renouvellements tacites, échéances)
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== URSSAF & CHARGES SOCIALES ===== -->
+  <section class="py-20 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center mb-16">
+        <div class="inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-1.5 mb-4">
+          <svg class="h-4 w-4 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          <span class="text-xs font-semibold tracking-wide text-primary-700 uppercase">Social</span>
+        </div>
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-primary-900 mb-4">URSSAF &amp; Charges Sociales</h2>
+        <p class="text-lg text-primary-600 max-w-2xl mx-auto">Un accompagnement administratif pour s&eacute;curiser vos d&eacute;marches sociales et &eacute;viter les oublis.</p>
+      </div>
+
+      <!-- Accordion cards -->
+      <div class="max-w-4xl mx-auto space-y-4">
+
+        <!-- 5.1 -->
+        <div class="reveal accordion-card rounded-2xl border border-surface-200 bg-white overflow-hidden hover:border-accent-200 transition-all duration-300">
+          <button class="accordion-trigger w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary-500 flex-shrink-0">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="8.5" cy="7" r="4" />
+                  <line x1="20" y1="8" x2="20" y2="14" />
+                  <line x1="23" y1="11" x2="17" y2="11" />
+                </svg>
+              </div>
+              <h3 class="font-heading text-base sm:text-lg font-semibold text-primary-800">Cr&eacute;ation, affiliation &amp; immatriculation</h3>
+            </div>
+            <svg class="accordion-chevron h-5 w-5 text-primary-400 flex-shrink-0 ml-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="accordion-content px-6">
+            <ul class="space-y-3 pb-4">
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Rassembler les pi&egrave;ces n&eacute;cessaires &agrave; l&rsquo;immatriculation
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Remplir les formulaires d&rsquo;affiliation
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Pr&eacute;parer un dossier complet pour les organismes sociaux
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5.2 -->
+        <div class="reveal accordion-card rounded-2xl border border-surface-200 bg-white overflow-hidden hover:border-accent-200 transition-all duration-300">
+          <button class="accordion-trigger w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary-500 flex-shrink-0">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                </svg>
+              </div>
+              <h3 class="font-heading text-base sm:text-lg font-semibold text-primary-800">D&eacute;clarations sociales &amp; r&eacute;gularisations URSSAF</h3>
+            </div>
+            <svg class="accordion-chevron h-5 w-5 text-primary-400 flex-shrink-0 ml-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="accordion-content px-6">
+            <ul class="space-y-3 pb-4">
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Centraliser les &eacute;l&eacute;ments de paie et de cotisation
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Pr&eacute;parer les d&eacute;clarations p&eacute;riodiques
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Constituer des dossiers de r&eacute;gularisation compl&egrave;ts
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5.3 -->
+        <div class="reveal accordion-card rounded-2xl border border-surface-200 bg-white overflow-hidden hover:border-accent-200 transition-all duration-300">
+          <button class="accordion-trigger w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary-500 flex-shrink-0">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 11 12 14 22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+              </div>
+              <h3 class="font-heading text-base sm:text-lg font-semibold text-primary-800">Mises en conformit&eacute; administrative</h3>
+            </div>
+            <svg class="accordion-chevron h-5 w-5 text-primary-400 flex-shrink-0 ml-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="accordion-content px-6">
+            <ul class="space-y-3 pb-4">
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                V&eacute;rifier l&rsquo;&eacute;tat de vos obligations sociales
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Identifier les &eacute;carts et pi&egrave;ces manquantes
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Pr&eacute;parer un plan de mise en conformit&eacute; document&eacute;
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5.4 -->
+        <div class="reveal accordion-card rounded-2xl border border-surface-200 bg-white overflow-hidden hover:border-accent-200 transition-all duration-300">
+          <button class="accordion-trigger w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary-500 flex-shrink-0">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                  <line x1="12" y1="9" x2="12" y2="13" />
+                  <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+              </div>
+              <h3 class="font-heading text-base sm:text-lg font-semibold text-primary-800">Accompagnement en cas de relance, mise en demeure, &eacute;ch&eacute;ancier</h3>
+            </div>
+            <svg class="accordion-chevron h-5 w-5 text-primary-400 flex-shrink-0 ml-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="accordion-content px-6">
+            <ul class="space-y-3 pb-4">
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Analyser les courriers de relance et mises en demeure
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Constituer un dossier de r&eacute;ponse structur&eacute;
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Pr&eacute;parer les demandes d&rsquo;&eacute;ch&eacute;ancier ou de d&eacute;lai
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5.5 -->
+        <div class="reveal accordion-card rounded-2xl border border-surface-200 bg-white overflow-hidden hover:border-accent-200 transition-all duration-300">
+          <button class="accordion-trigger w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <div class="flex items-center gap-4">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary-500 flex-shrink-0">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <h3 class="font-heading text-base sm:text-lg font-semibold text-primary-800">Suivi administratif des cotisations</h3>
+            </div>
+            <svg class="accordion-chevron h-5 w-5 text-primary-400 flex-shrink-0 ml-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="accordion-content px-6">
+            <ul class="space-y-3 pb-4">
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Mettre en place un tableau de suivi des cotisations
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Organiser l&rsquo;archivage des justificatifs de paiement
+              </li>
+              <li class="flex items-start gap-3 text-sm text-primary-600">
+                <svg class="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                &Eacute;tablir un calendrier des &eacute;ch&eacute;ances sociales
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LAWYER NETWORK BANNER ===== -->
+  <section class="py-16 bg-primary-500">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-white flex-shrink-0">
+          <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49" />
+            <line x1="12" y1="2" x2="12" y2="6" />
+            <line x1="12" y1="18" x2="12" y2="22" />
+            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
+            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07" />
+            <line x1="2" y1="12" x2="6" y2="12" />
+            <line x1="18" y1="12" x2="22" y2="12" />
+          </svg>
+        </div>
+        <div class="flex-1 text-center lg:text-left">
+          <h2 class="font-heading text-2xl sm:text-3xl font-bold text-white mb-4">R&eacute;seau d&rsquo;avocats partenaires</h2>
+          <p class="text-primary-100 text-lg leading-relaxed max-w-3xl">
+            En compl&eacute;ment de notre expertise, nous collaborons d&eacute;sormais avec un r&eacute;seau d&rsquo;avocats exp&eacute;riment&eacute;s (plus de 20 ans d&rsquo;exp&eacute;rience) pour vous offrir un accompagnement juridique solide.
+          </p>
+        </div>
+        <a href="../contact.html"
+          class="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-semibold text-primary-700 shadow-lg hover:bg-primary-50 transition-colors duration-200 cursor-pointer flex-shrink-0">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          Nous contacter
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="py-20 bg-gradient-to-br from-primary-50 via-white to-surface-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="reveal text-center max-w-2xl mx-auto">
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-primary-900 mb-6">Pr&ecirc;t &agrave; structurer vos dossiers fiscaux ?</h2>
+        <p class="text-lg text-primary-600 mb-10 leading-relaxed">Contactez-nous d&egrave;s maintenant pour un premier &eacute;change gratuit et sans engagement.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="tel:+33602043255"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-accent-500/20 hover:bg-accent-600 transition-colors duration-200 cursor-pointer pulse-ring">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+            06 02 04 32 55
+          </a>
+          <a href="../contact.html"
+            class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-primary-200 px-7 py-3.5 text-base font-semibold text-primary-700 hover:bg-primary-50 transition-colors duration-200 cursor-pointer">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            Formulaire de contact
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-primary-900 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-500 text-white">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div>
+              <span class="block font-heading text-sm font-bold tracking-wide text-white">CABINET FISCAL</span>
+              <span class="block font-heading text-xs font-medium tracking-widest text-accent-400">IMMO</span>
+            </div>
+          </div>
+          <p class="text-primary-400 text-sm leading-relaxed max-w-md">Nous accompagnons particuliers, investisseurs et
+            dirigeants dans la pr&eacute;paration, l&rsquo;organisation et le suivi de tous leurs dossiers fiscaux, immobiliers et
+            administratifs.</p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Navigation</h4>
+          <ul class="space-y-2.5">
+            <li><a href="../index.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Accueil</a></li>
+            <li><a href="fiscal.html"
+                class="text-sm text-accent-400 font-semibold cursor-pointer">Fiscal</a></li>
+            <li><a href="immobilier.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Immobilier</a></li>
+            <li><a href="affaires.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Affaires</a></li>
+            <li><a href="../blog/index.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Blog</a></li>
+            <li><a href="../contact.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Informations</h4>
+          <ul class="space-y-2.5">
+            <li><a href="../mentions-legales.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Mentions l&eacute;gales</a></li>
+            <li><a href="../politique-confidentialite.html"
+                class="text-sm text-primary-400 hover:text-accent-400 transition-colors cursor-pointer">Politique de confidentialit&eacute;</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-primary-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-primary-500">&copy; 2025 Cabinet Fiscal Immo. Tous droits r&eacute;serv&eacute;s.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-primary-500 hover:text-accent-400 transition-colors cursor-pointer"
+            aria-label="LinkedIn">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+          <a href="#" class="text-primary-500 hover:text-accent-400 transition-colors cursor-pointer"
+            aria-label="Instagram">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+            </svg>
+          </a>
+          <a href="#" class="text-primary-500 hover:text-accent-400 transition-colors cursor-pointer"
+            aria-label="Facebook">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== FLOATING CTA (Mobile) ===== -->
+  <div class="fixed bottom-6 right-6 z-50 md:hidden">
+    <a href="tel:+33602043255"
+      class="flex h-14 w-14 items-center justify-center rounded-full bg-accent-500 text-white shadow-xl shadow-accent-500/30 hover:bg-accent-600 transition-colors cursor-pointer pulse-ring"
+      aria-label="Appeler le Cabinet Fiscal Immo">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path
+          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      mobileBtn.setAttribute('aria-expanded', !isOpen);
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Accordion functionality
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const card = trigger.closest('.accordion-card');
+        const content = card.querySelector('.accordion-content');
+        const chevron = trigger.querySelector('.accordion-chevron');
+        const isOpen = content.classList.contains('open');
+
+        // Close all other accordions
+        document.querySelectorAll('.accordion-content.open').forEach(openContent => {
+          if (openContent !== content) {
+            openContent.classList.remove('open');
+            openContent.closest('.accordion-card').querySelector('.accordion-chevron').classList.remove('rotate');
+            openContent.closest('.accordion-card').querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Toggle current
+        content.classList.toggle('open');
+        chevron.classList.toggle('rotate');
+        trigger.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

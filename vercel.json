@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/cabinet-fiscal-immo/$1"
+    }
+  ]
+}
