@@ -318,11 +318,144 @@ function slugify(str) {
   return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 }
 
+const SEED_ARTICLES = [
+  {
+    title: 'Déclaration de revenus 2026 : les 5 erreurs les plus fréquentes',
+    slug: 'declaration-revenus-2026-erreurs',
+    description: 'Découvrez les pièges classiques qui coûtent cher aux contribuables et comment les éviter facilement avec une bonne organisation.',
+    category: 'fiscalite', tags: ['fiscalite'],
+    published: true,
+    date: new Date('2026-02-15'),
+    image: '',
+    content: `La période de déclaration des revenus est souvent source de stress. Entre les formulaires complexes, les cases à ne pas oublier et les délais serrés, il est facile de commettre des erreurs qui peuvent coûter cher. Voici les 5 erreurs les plus fréquentes que nous constatons au Cabinet Fiscal Immo, et nos conseils pour les éviter.
+
+## 1. Oublier de déclarer les revenus locatifs
+
+C'est l'erreur la plus courante chez les propriétaires bailleurs. Que vous louiez en nu ou en meublé, **tous les loyers perçus doivent être déclarés**, même si vous avez eu des périodes de vacance locative.
+
+Ce que beaucoup ignorent :
+- Les loyers encaissés via des plateformes type Airbnb doivent aussi être déclarés
+- Les charges récupérées auprès du locataire sont des revenus imposables
+- En cas de sous-location, les revenus sont également à déclarer
+
+> Notre conseil : Tenez un tableau mensuel de vos loyers perçus. Au moment de la déclaration, tout est déjà prêt.
+
+## 2. Ne pas déduire toutes les charges admissibles
+
+À l'inverse, de nombreux contribuables oublient de déduire des charges qui réduiraient leur base imposable. En régime réel, vous pouvez déduire :
+- Les intérêts d'emprunt et frais d'assurance du prêt
+- Les travaux d'entretien et de réparation
+- Les frais de gestion et honoraires
+- La taxe foncière (hors ordures ménagères)
+- Les primes d'assurance du bien
+
+Chaque euro de charge déductible oublié, c'est de l'impôt payé en trop.
+
+## 3. Confondre micro-foncier et régime réel
+
+Le choix du régime fiscal a un impact direct sur votre imposition. Le **micro-foncier** (abattement de 30%) est simple mais pas toujours avantageux, notamment si vos charges dépassent 30% de vos revenus locatifs.
+
+## 4. Rater les crédits et réductions d'impôt
+
+De nombreuses dépenses ouvrent droit à des avantages fiscaux souvent méconnus :
+- **Emploi à domicile** : 50% de crédit d'impôt
+- **Dons aux associations** : réduction de 66% à 75%
+- **Investissement locatif** : dispositifs Pinel, Denormandie, Malraux
+- **Travaux énergétiques** : MaPrimeRénov' et crédits d'impôt associés
+
+## 5. Envoyer sa déclaration sans la relire
+
+Les déclarations pré-remplies par l'administration contiennent parfois des erreurs : montants de salaires incorrects, situation familiale obsolète, comptes bancaires à l'étranger non pré-remplis.
+
+> Relisez systématiquement chaque case pré-remplie avant de valider.
+
+---
+
+## Comment le Cabinet Fiscal Immo vous aide
+
+Notre rôle est justement de vous éviter ces erreurs. Nous collectons tous vos documents en amont, vérifions chaque information pré-remplie, identifions toutes les déductions applicables et préparons un dossier complet et structuré. **Contactez-nous pour un premier échange gratuit.**`
+  },
+  {
+    title: 'LMNP en 2026 : ce qui change pour les investisseurs',
+    slug: 'lmnp-2026-changements',
+    description: 'Le statut LMNP évolue. Voici ce que vous devez savoir pour adapter votre stratégie et vos déclarations cette année.',
+    category: 'immobilier', tags: ['immobilier'],
+    published: true,
+    date: new Date('2026-02-08'),
+    image: '',
+    content: `Le statut de Loueur en Meublé Non Professionnel (LMNP) continue d'évoluer en 2026. Ces changements impactent directement la fiscalité des investisseurs immobiliers. Voici ce que vous devez savoir.
+
+## La réintégration des amortissements dans la plus-value
+
+Depuis 2025, lors de la cession d'un bien en LMNP, les amortissements déduits pendant la période de location **sont réintégrés dans le calcul de la plus-value imposable**. Concrètement, cela réduit l'avantage fiscal historique du régime.
+
+## Le régime micro-BIC toujours attractif
+
+Pour les revenus locatifs meublés inférieurs à 77 700 €/an, le micro-BIC avec son abattement de 50% reste une option simple. Mais attention : cet abattement peut être moins avantageux que le régime réel si vos charges et amortissements sont élevés.
+
+## Nos recommandations pour 2026
+
+- **Faites un bilan** de vos amortissements cumulés avant toute décision de vente
+- **Comparez** régime réel vs micro-BIC avec votre situation réelle
+- **Anticipez** l'impact fiscal d'une cession grâce à une simulation
+
+**Le Cabinet Fiscal Immo vous accompagne** dans l'optimisation de votre stratégie LMNP. Contactez-nous pour une analyse personnalisée de votre situation.`
+  },
+  {
+    title: '30 Minutes pour Reprendre le Contrôle de Votre Organisation',
+    slug: 'organiser-documents-administratifs',
+    description: 'Notre méthode éprouvée pour classer, trier et archiver efficacement tous vos documents importants.',
+    category: 'organisation', tags: ['organisation'],
+    published: true,
+    date: new Date('2026-02-01'),
+    image: '',
+    content: `Vous passez du temps à chercher un document dont vous avez besoin au mauvais moment ? Vous n'êtes pas seul. Selon nos observations, la majorité de nos clients perdent plusieurs heures par an à cause d'une mauvaise organisation documentaire. Voici notre méthode en 30 minutes.
+
+## Étape 1 : Le tri rapide (10 minutes)
+
+Rassemblez tous vos documents en un seul endroit et triez-les en 3 piles :
+- **À garder** : documents fiscaux, immobiliers, contrats actifs
+- **À archiver** : documents de plus de 3 ans mais à conserver légalement
+- **À détruire** : documents obsolètes, doublons, publicités
+
+> Durées légales de conservation : 3 ans pour les impôts, 10 ans pour les documents comptables, 30 ans pour les actes immobiliers.
+
+## Étape 2 : Le classement par thème (15 minutes)
+
+Créez des dossiers clairs :
+1. **Fiscal** : avis d'imposition, déclarations, justificatifs de charges
+2. **Immobilier** : titres de propriété, baux, diagnostics, charges de copropriété
+3. **Professionnel** : contrats, fiches de paie, relevés de carrière
+4. **Assurances** : contrats, attestations, sinistres
+5. **Banque** : relevés annuels, crédits en cours
+
+## Étape 3 : La numérisation (5 minutes par dossier)
+
+Scannez ou photographiez les documents importants. Un cloud sécurisé (Google Drive, iCloud) vous permet d'y accéder depuis n'importe où.
+
+---
+
+## Le Cabinet Fiscal Immo va plus loin
+
+Nous ne vous aidons pas seulement à classer : nous **structurons votre dossier fiscal complet**, prêt à être transmis à votre expert-comptable ou à l'administration. Contactez-nous pour un accompagnement personnalisé.`
+  }
+];
+
 let articlesData = [];
 
 async function loadArticles() {
   try {
     const snap = await db.collection('articles').orderBy('createdAt','desc').get();
+    if (snap.empty) {
+      // Seed initial articles
+      const batch = db.batch();
+      SEED_ARTICLES.forEach(a => {
+        const ref = db.collection('articles').doc();
+        batch.set(ref, { ...a, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+      });
+      await batch.commit();
+      return loadArticles();
+    }
     articlesData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     renderArticles();
   } catch(e) {
