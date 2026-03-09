@@ -3,16 +3,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Articles — lecture publique pour les articles publiés, écriture ouverte
-    match /articles/{articleId} {
-      allow read: if resource.data.published == true;
-      allow write: if true;
+    // Lecture et écriture ouvertes — le filtrage published/isActive est fait côté JS
+    match /articles/{id} {
+      allow read, write: if true;
     }
 
-    // Témoignages — lecture publique pour les actifs, écriture ouverte
-    match /testimonials/{testimonialId} {
-      allow read: if resource.data.isActive == true;
-      allow write: if true;
+    match /testimonials/{id} {
+      allow read, write: if true;
     }
 
   }
