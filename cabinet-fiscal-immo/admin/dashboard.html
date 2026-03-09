@@ -271,17 +271,28 @@ if (sessionStorage.getItem('admin_auth') !== 'true') {
 }
 
 // ── Init Firestore ──────────────────────────────────────────────────────────
-if (!window.FIREBASE_CONFIG || window.FIREBASE_CONFIG.apiKey === 'VOTRE_API_KEY') {
-  alert('⚠️ Configurez firebase-config.js (apiKey, projectId…) avant d\'utiliser l\'admin.');
+let db;
+try {
+  if (!window.FIREBASE_CONFIG || window.FIREBASE_CONFIG.apiKey === 'VOTRE_API_KEY') {
+    throw new Error('firebase-config.js non configuré');
+  }
+  if (!firebase.apps.length) {
+    firebase.initializeApp(window.FIREBASE_CONFIG);
+  }
+  db = firebase.firestore();
+  console.log('Firebase OK — projet:', window.FIREBASE_CONFIG.projectId);
+} catch(initErr) {
+  alert('⚠️ Erreur Firebase : ' + initErr.message);
   window.location.replace('/admin/');
 }
 
-firebase.initializeApp(window.FIREBASE_CONFIG);
-const db = firebase.firestore();
-
 document.getElementById('loading-overlay').classList.add('hidden');
-loadArticles();
-loadTestimonies();
+
+// Lancer le chargement
+(async function init() {
+  await loadArticles();
+  await loadTestimonies();
+})();
 
 document.getElementById('logout-btn').addEventListener('click', () => {
   sessionStorage.removeItem('admin_auth');
@@ -444,23 +455,30 @@ Nous ne vous aidons pas seulement à classer : nous **structurons votre dossier 
 let articlesData = [];
 
 async function loadArticles() {
+  const loading = document.getElementById('articles-loading');
   try {
+    console.log('Loading articles...');
     const snap = await db.collection('articles').orderBy('createdAt','desc').get();
+    console.log('Articles found:', snap.size);
     if (snap.empty) {
       // Seed initial articles
-      const batch = db.batch();
-      SEED_ARTICLES.forEach(a => {
-        const ref = db.collection('articles').doc();
-        batch.set(ref, { ...a, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-      });
-      await batch.commit();
+      console.log('Seeding articles...');
+      for (const a of SEED_ARTICLES) {
+        await db.collection('articles').add({
+          ...a,
+          date: a.date instanceof Date ? firebase.firestore.Timestamp.fromDate(a.date) : a.date,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      }
+      console.log('Seed OK, reloading...');
       return loadArticles();
     }
     articlesData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     renderArticles();
   } catch(e) {
-    console.error(e);
-    toast('Erreur chargement articles', false);
+    console.error('loadArticles error:', e);
+    if (loading) loading.classList.add('hidden');
+    toast('Erreur articles : ' + (e.message || e.code), false);
   }
 }
 
@@ -561,28 +579,32 @@ document.getElementById('article-form').addEventListener('submit', async (e) => 
   spin.classList.remove('hidden');
 
   const id = document.getElementById('article-id').value;
+  const category = document.getElementById('a-category').value;
   const data = {
     title:       document.getElementById('a-title').value.trim(),
     description: document.getElementById('a-description').value.trim(),
-    category:    document.getElementById('a-category').value,
+    category:    category,
+    tags:        [category],
     slug:        document.getElementById('a-slug').value.trim() || slugify(document.getElementById('a-title').value),
     image:       document.getElementById('a-image').value.trim(),
     content:     document.getElementById('a-content').value,
     published:   document.getElementById('a-published').checked,
-    date:        firebase.firestore.FieldValue.serverTimestamp(),
+    date:        new Date(),
   };
+
+  console.log('Saving article:', id || 'NEW', data.title);
 
   try {
     if (id) {
       await db.collection('articles').doc(id).update(data);
       toast('Article mis à jour !');
     } else {
-      data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      data.createdAt = new Date();
       await db.collection('articles').add(data);
       toast('Article créé !');
     }
     closeArticleForm();
-    loadArticles();
+    await loadArticles();
   } catch(err) {
     console.error('Save article error:', err);
     toast('Erreur : ' + (err.message || err.code || 'inconnue'), false);
@@ -617,23 +639,28 @@ const SEED_TESTIMONIALS = [
 let testimoniesData = [];
 
 async function loadTestimonies() {
+  const loading = document.getElementById('testimonies-loading');
   try {
+    console.log('Loading testimonials...');
     const snap = await db.collection('testimonials').orderBy('displayOrder').get();
+    console.log('Testimonials found:', snap.size);
     if (snap.empty) {
-      // Seed initial testimonials
-      const batch = db.batch();
-      SEED_TESTIMONIALS.forEach(t => {
-        const ref = db.collection('testimonials').doc();
-        batch.set(ref, { ...t, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-      });
-      await batch.commit();
-      // Reload
+      console.log('Seeding testimonials...');
+      for (const t of SEED_TESTIMONIALS) {
+        await db.collection('testimonials').add({
+          ...t,
+          createdAt: new Date()
+        });
+      }
+      console.log('Seed OK, reloading...');
       return loadTestimonies();
     }
     testimoniesData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     renderTestimonies();
   } catch(e) {
-    console.error(e);
+    console.error('loadTestimonies error:', e);
+    if (loading) loading.classList.add('hidden');
+    toast('Erreur témoignages : ' + (e.message || e.code), false);
   }
 }
 
@@ -737,14 +764,15 @@ document.getElementById('testimony-form').addEventListener('submit', async (e) =
       await db.collection('testimonials').doc(id).update(data);
       toast('Témoignage mis à jour !');
     } else {
-      data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      data.createdAt = new Date();
       await db.collection('testimonials').add(data);
       toast('Témoignage ajouté !');
     }
     closeTestimonyForm();
-    loadTestimonies();
+    await loadTestimonies();
   } catch(err) {
-    toast('Erreur : ' + err.message, false);
+    console.error('Save testimony error:', err);
+    toast('Erreur : ' + (err.message || err.code || 'inconnue'), false);
   }
   btn.disabled = false;
   spin.classList.add('hidden');
