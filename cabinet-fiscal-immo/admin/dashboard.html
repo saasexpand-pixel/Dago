@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/img/logo.png">
+  <title>Dashboard Admin — Cabinet Fiscal Immo</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { 50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#1E5F8C',600:'#1A5179',700:'#164466',800:'#0F2E45',900:'#0A1F30' },
+            accent:  { 50:'#FFF7ED',100:'#FFEDD5',200:'#FED7AA',300:'#FDBA74',400:'#F59E0B',500:'#E8850A',600:'#D97706' },
+            surface: { 50:'#F8FAFC',100:'#F1F5F9',200:'#E2E8F0' }
+          },
+          fontFamily: { heading:['Lexend','sans-serif'], body:['Source Sans 3','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Source Sans 3', sans-serif; }
+    h1,h2,h3,h4 { font-family: 'Lexend', sans-serif; }
+    .tab-active { border-bottom: 2px solid #1E5F8C; color: #0F2E45; font-weight: 600; }
+    .slide-in { animation: slideIn .25s ease; }
+    @keyframes slideIn { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+    textarea { resize: vertical; }
+  </style>
+</head>
+
+<body class="bg-surface-50 text-primary-800 antialiased">
+
+<!-- Loading overlay -->
+<div id="loading-overlay" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+  <div class="flex flex-col items-center gap-3 text-primary-400">
+    <svg class="h-10 w-10 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    <span class="text-sm">Chargement…</span>
+  </div>
+</div>
+
+<!-- ── HEADER ──────────────────────────────────────────────────────────── -->
+<header class="bg-white border-b border-surface-200 sticky top-0 z-40 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <img src="../assets/img/logo.png" alt="Cabinet Fiscal Immo" class="h-9 w-auto">
+      <span class="hidden sm:block text-xs font-medium text-primary-500 bg-surface-100 px-2.5 py-1 rounded-full">Admin</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span id="user-email" class="hidden sm:block text-sm text-primary-500 truncate max-w-[180px]"></span>
+      <a href="../index.html" target="_blank" class="text-sm text-primary-500 hover:text-primary-700 transition-colors hidden md:block">Voir le site ↗</a>
+      <button id="logout-btn" class="rounded-xl border border-surface-200 px-4 py-2 text-sm font-medium text-primary-600 hover:bg-surface-100 transition-colors flex items-center gap-2">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Déconnexion
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ── TABS ────────────────────────────────────────────────────────────── -->
+<div class="bg-white border-b border-surface-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-6">
+    <button id="tab-articles" class="py-4 px-1 text-sm tab-active transition-colors" onclick="switchTab('articles')">
+      📝 Articles
+    </button>
+    <button id="tab-temoignages" class="py-4 px-1 text-sm text-primary-500 hover:text-primary-700 transition-colors" onclick="switchTab('temoignages')">
+      ⭐ Témoignages
+    </button>
+  </div>
+</div>
+
+<!-- ── MAIN ────────────────────────────────────────────────────────────── -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+  <!-- ═══════════════ ARTICLES TAB ═══════════════ -->
+  <div id="panel-articles">
+
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-bold text-primary-900">Articles de blog</h2>
+      <button onclick="openArticleForm(null)" class="rounded-xl bg-accent-500 hover:bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-accent-500/20 transition-colors flex items-center gap-2">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nouvel article
+      </button>
+    </div>
+
+    <!-- Article list -->
+    <div id="articles-table" class="bg-white rounded-2xl border border-surface-200 overflow-hidden">
+      <div id="articles-loading" class="flex justify-center py-12 text-primary-400">
+        <svg class="h-6 w-6 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+      </div>
+      <div id="articles-empty" class="hidden text-center py-12 text-primary-400">
+        <p class="text-base mb-1">Aucun article pour le moment.</p>
+        <p class="text-sm">Cliquez sur "Nouvel article" pour commencer.</p>
+      </div>
+      <table id="articles-list" class="hidden w-full text-sm">
+        <thead class="bg-surface-50 border-b border-surface-200">
+          <tr>
+            <th class="text-left px-6 py-3 text-xs font-semibold text-primary-500 uppercase tracking-wide">Titre</th>
+            <th class="text-left px-6 py-3 text-xs font-semibold text-primary-500 uppercase tracking-wide hidden md:table-cell">Catégorie</th>
+            <th class="text-left px-6 py-3 text-xs font-semibold text-primary-500 uppercase tracking-wide hidden lg:table-cell">Date</th>
+            <th class="text-left px-6 py-3 text-xs font-semibold text-primary-500 uppercase tracking-wide">Statut</th>
+            <th class="text-right px-6 py-3"></th>
+          </tr>
+        </thead>
+        <tbody id="articles-tbody" class="divide-y divide-surface-100"></tbody>
+      </table>
+    </div>
+
+    <!-- Article form (slide-in panel) -->
+    <div id="article-form-panel" class="hidden fixed inset-y-0 right-0 w-full sm:w-[600px] bg-white shadow-2xl z-50 overflow-y-auto border-l border-surface-200">
+      <div class="sticky top-0 bg-white border-b border-surface-200 px-6 py-4 flex items-center justify-between">
+        <h3 id="form-title" class="text-lg font-bold text-primary-900">Nouvel article</h3>
+        <button onclick="closeArticleForm()" class="rounded-lg p-2 hover:bg-surface-100 transition-colors text-primary-500">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="article-form" class="p-6 space-y-5">
+        <input type="hidden" id="article-id">
+        <div>
+          <label class="block text-sm font-medium text-primary-700 mb-1.5">Titre *</label>
+          <input id="a-title" type="text" required class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20" placeholder="Titre de l'article">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-primary-700 mb-1.5">Description (meta SEO) *</label>
+          <textarea id="a-description" required rows="2" class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20" placeholder="Courte description pour les moteurs de recherche (160 car. max)"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-primary-700 mb-1.5">Catégorie</label>
+            <select id="a-category" class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 bg-white">
+              <option value="fiscalite">Fiscalité</option>
+              <option value="immobilier">Immobilier</option>
+              <option value="organisation">Organisation</option>
+              <option value="entreprise">Entreprise</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-primary-700 mb-1.5">Slug URL</label>
+            <input id="a-slug" type="text" class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20" placeholder="mon-article-slug">
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-primary-700 mb-1.5">Image (URL)</label>
+          <input id="a-image" type="url" class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20" placeholder="https://...">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-primary-700 mb-1.5">Contenu (Markdown) *</label>
+          <textarea id="a-content" required rows="16" class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm font-mono focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20" placeholder="# Titre principal&#10;&#10;Votre contenu en Markdown...&#10;&#10;## Section&#10;&#10;Paragraphe..."></textarea>
+        </div>
+        <div class="flex items-center justify-between py-4 border-t border-surface-100">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <div class="relative">
+              <input type="checkbox" id="a-published" class="sr-only peer">
+              <div class="w-10 h-6 bg-surface-200 peer-checked:bg-accent-500 rounded-full transition-colors"></div>
+              <div class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4"></div>
+            </div>
+            <span class="text-sm font-medium text-primary-700">Publier l'article</span>
+          </label>
+          <div class="flex gap-3">
+            <button type="button" onclick="closeArticleForm()" class="rounded-xl border border-surface-200 px-5 py-2.5 text-sm font-medium text-primary-600 hover:bg-surface-100 transition-colors">Annuler</button>
+            <button type="submit" id="article-save-btn" class="rounded-xl bg-primary-500 hover:bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors flex items-center gap-2">
+              <svg id="article-save-spin" class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+              Enregistrer
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="form-overlay" class="hidden fixed inset-0 bg-primary-900/30 z-40" onclick="closeArticleForm()"></div>
+  </div>
+
+  <!-- ═══════════════ TÉMOIGNAGES TAB ═══════════════ -->
+  <div id="panel-temoignages" class="hidden">
+
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-bold text-primary-900">Témoignages clients</h2>
+      <button onclick="openTestimonyForm(null)" class="rounded-xl bg-accent-500 hover:bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-accent-500/20 transition-colors flex items-center gap-2">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Ajouter
+      </button>
+    </div>
+
+    <div id="testimonies-loading" class="flex justify-center py-12 text-primary-400">
+      <svg class="h-6 w-6 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    </div>
+    <div id="testimonies-grid" class="hidden grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+    <!-- Testimony modal -->
+    <div id="testimony-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div class="absolute inset-0 bg-primary-900/40" onclick="closeTestimonyForm()"></div>
+      <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 z-10">
+        <div class="flex items-center justify-between mb-5">
+          <h3 id="testimony-form-title" class="text-lg font-bold text-primary-900">Modifier le témoignage</h3>
+          <button onclick="closeTestimonyForm()" class="rounded-lg p-1.5 hover:bg-surface-100 transition-colors text-primary-500">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <form id="testimony-form" class="space-y-4">
+          <input type="hidden" id="t-id">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-primary-700 mb-1.5">Nom *</label>
+              <input id="t-name" type="text" required class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-primary-700 mb-1.5">Rôle / Titre</label>
+              <input id="t-role" type="text" class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20" placeholder="ex: Propriétaire">
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-primary-700 mb-1.5">Témoignage *</label>
+            <textarea id="t-text" required rows="5" class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20" placeholder="Texte du témoignage (sans guillemets)"></textarea>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-primary-700 mb-1.5">Note (étoiles)</label>
+              <select id="t-rating" class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 bg-white">
+                <option value="5">★★★★★ (5)</option>
+                <option value="4">★★★★☆ (4)</option>
+                <option value="3">★★★☆☆ (3)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-primary-700 mb-1.5">Ordre d'affichage</label>
+              <input id="t-order" type="number" min="1" class="w-full rounded-xl border border-surface-200 px-4 py-2.5 text-sm focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20" placeholder="1">
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-surface-100">
+            <label class="flex items-center gap-3 cursor-pointer">
+              <div class="relative">
+                <input type="checkbox" id="t-active" checked class="sr-only peer">
+                <div class="w-10 h-6 bg-surface-200 peer-checked:bg-accent-500 rounded-full transition-colors"></div>
+                <div class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-4"></div>
+              </div>
+              <span class="text-sm font-medium text-primary-700">Visible sur le site</span>
+            </label>
+            <div class="flex gap-3">
+              <button type="button" onclick="closeTestimonyForm()" class="rounded-xl border border-surface-200 px-4 py-2 text-sm font-medium text-primary-600 hover:bg-surface-100 transition-colors">Annuler</button>
+              <button type="submit" id="testimony-save-btn" class="rounded-xl bg-primary-500 hover:bg-primary-600 px-5 py-2 text-sm font-semibold text-white transition-colors flex items-center gap-2">
+                <svg id="testimony-save-spin" class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                Enregistrer
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div><!-- /panel-temoignages -->
+
+</main>
+
+<!-- Toast notification -->
+<div id="toast" class="hidden fixed bottom-6 right-6 z-[100] bg-primary-900 text-white px-5 py-3 rounded-xl shadow-xl text-sm font-medium transition-all"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="../firebase-config.js"></script>
+
+<script>
+// ── Init ───────────────────────────────────────────────────────────────────
+if (!window.FIREBASE_CONFIG || window.FIREBASE_CONFIG.apiKey === 'VOTRE_API_KEY') {
+  alert('⚠️ Configurez firebase-config.js avant d\'utiliser l\'admin.');
+  window.location.replace('index.html');
+}
+
+firebase.initializeApp(window.FIREBASE_CONFIG);
+const auth = firebase.auth();
+const db   = firebase.firestore();
+
+// Auth guard
+auth.onAuthStateChanged(user => {
+  if (!user) {
+    window.location.replace('index.html');
+    return;
+  }
+  document.getElementById('user-email').textContent = user.email;
+  document.getElementById('loading-overlay').classList.add('hidden');
+  loadArticles();
+  loadTestimonies();
+});
+
+document.getElementById('logout-btn').addEventListener('click', () => auth.signOut());
+
+// ── Tabs ───────────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  const panels = { articles: 'panel-articles', temoignages: 'panel-temoignages' };
+  const tabs   = { articles: 'tab-articles',   temoignages: 'tab-temoignages'   };
+  Object.keys(panels).forEach(k => {
+    document.getElementById(panels[k]).classList.toggle('hidden', k !== tab);
+    document.getElementById(tabs[k]).className = k === tab
+      ? 'py-4 px-1 text-sm tab-active transition-colors'
+      : 'py-4 px-1 text-sm text-primary-500 hover:text-primary-700 transition-colors';
+  });
+}
+
+// ── Toast ──────────────────────────────────────────────────────────────────
+function toast(msg, ok = true) {
+  const el = document.getElementById('toast');
+  el.textContent = (ok ? '✓ ' : '✗ ') + msg;
+  el.className = `fixed bottom-6 right-6 z-[100] ${ok ? 'bg-primary-800' : 'bg-red-600'} text-white px-5 py-3 rounded-xl shadow-xl text-sm font-medium`;
+  el.classList.remove('hidden');
+  setTimeout(() => el.classList.add('hidden'), 3000);
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// ARTICLES
+// ══════════════════════════════════════════════════════════════════════════
+const CAT_LABELS = { fiscalite:'Fiscalité', immobilier:'Immobilier', organisation:'Organisation', entreprise:'Entreprise' };
+
+function slugify(str) {
+  return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+
+let articlesData = [];
+
+async function loadArticles() {
+  try {
+    const snap = await db.collection('articles').orderBy('createdAt','desc').get();
+    articlesData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderArticles();
+  } catch(e) {
+    console.error(e);
+    toast('Erreur chargement articles', false);
+  }
+}
+
+function renderArticles() {
+  const loading = document.getElementById('articles-loading');
+  const empty   = document.getElementById('articles-empty');
+  const list    = document.getElementById('articles-list');
+  const tbody   = document.getElementById('articles-tbody');
+
+  loading.classList.add('hidden');
+
+  if (!articlesData.length) {
+    empty.classList.remove('hidden');
+    list.classList.add('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+  list.classList.remove('hidden');
+
+  tbody.innerHTML = articlesData.map(a => {
+    const date = a.date ? new Date(a.date.seconds ? a.date.seconds*1000 : a.date).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'}) : '—';
+    const cat  = CAT_LABELS[a.category] || a.category || '—';
+    return `
+    <tr class="hover:bg-surface-50 transition-colors">
+      <td class="px-6 py-4">
+        <p class="font-medium text-primary-800 leading-snug">${a.title}</p>
+        <p class="text-xs text-primary-400 mt-0.5 truncate max-w-xs">${a.description || ''}</p>
+      </td>
+      <td class="px-6 py-4 hidden md:table-cell">
+        <span class="inline-block rounded-full bg-primary-50 text-primary-600 text-xs font-medium px-2.5 py-1">${cat}</span>
+      </td>
+      <td class="px-6 py-4 text-sm text-primary-500 hidden lg:table-cell">${date}</td>
+      <td class="px-6 py-4">
+        <span class="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${a.published ? 'bg-green-50 text-green-700' : 'bg-surface-100 text-primary-500'}">
+          <span class="w-1.5 h-1.5 rounded-full ${a.published ? 'bg-green-500' : 'bg-primary-400'}"></span>
+          ${a.published ? 'Publié' : 'Brouillon'}
+        </span>
+      </td>
+      <td class="px-6 py-4 text-right">
+        <div class="flex items-center justify-end gap-2">
+          <button onclick="openArticleForm('${a.id}')" class="rounded-lg px-3 py-1.5 text-xs font-medium text-primary-600 hover:bg-surface-100 transition-colors border border-surface-200">Modifier</button>
+          <button onclick="deleteArticle('${a.id}','${a.title.replace(/'/g,"\\'")}') "class="rounded-lg px-3 py-1.5 text-xs font-medium text-red-500 hover:bg-red-50 transition-colors border border-red-100">Supprimer</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function openArticleForm(id) {
+  const panel   = document.getElementById('article-form-panel');
+  const overlay = document.getElementById('form-overlay');
+  const formTitle = document.getElementById('form-title');
+
+  // Reset form
+  document.getElementById('article-form').reset();
+  document.getElementById('article-id').value = '';
+  document.getElementById('a-published').checked = false;
+
+  if (id) {
+    const a = articlesData.find(x => x.id === id);
+    if (!a) return;
+    formTitle.textContent = 'Modifier l\'article';
+    document.getElementById('article-id').value = id;
+    document.getElementById('a-title').value       = a.title || '';
+    document.getElementById('a-description').value = a.description || '';
+    document.getElementById('a-category').value    = a.category || 'fiscalite';
+    document.getElementById('a-slug').value        = a.slug || '';
+    document.getElementById('a-image').value       = a.image || '';
+    document.getElementById('a-content').value     = a.content || '';
+    document.getElementById('a-published').checked = !!a.published;
+  } else {
+    formTitle.textContent = 'Nouvel article';
+  }
+
+  panel.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+  document.getElementById('a-title').focus();
+}
+
+function closeArticleForm() {
+  document.getElementById('article-form-panel').classList.add('hidden');
+  document.getElementById('form-overlay').classList.add('hidden');
+}
+
+// Auto-generate slug from title
+document.getElementById('a-title').addEventListener('input', function() {
+  const slugField = document.getElementById('a-slug');
+  if (!document.getElementById('article-id').value) { // only for new articles
+    slugField.value = slugify(this.value);
+  }
+});
+
+document.getElementById('article-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn  = document.getElementById('article-save-btn');
+  const spin = document.getElementById('article-save-spin');
+  btn.disabled = true;
+  spin.classList.remove('hidden');
+
+  const id = document.getElementById('article-id').value;
+  const data = {
+    title:       document.getElementById('a-title').value.trim(),
+    description: document.getElementById('a-description').value.trim(),
+    category:    document.getElementById('a-category').value,
+    slug:        document.getElementById('a-slug').value.trim() || slugify(document.getElementById('a-title').value),
+    image:       document.getElementById('a-image').value.trim(),
+    content:     document.getElementById('a-content').value,
+    published:   document.getElementById('a-published').checked,
+    date:        firebase.firestore.FieldValue.serverTimestamp(),
+  };
+
+  try {
+    if (id) {
+      await db.collection('articles').doc(id).update(data);
+      toast('Article mis à jour !');
+    } else {
+      data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      await db.collection('articles').add(data);
+      toast('Article créé !');
+    }
+    closeArticleForm();
+    loadArticles();
+  } catch(err) {
+    toast('Erreur : ' + err.message, false);
+  }
+  btn.disabled = false;
+  spin.classList.add('hidden');
+});
+
+async function deleteArticle(id, title) {
+  if (!confirm(`Supprimer l'article "${title}" ? Cette action est irréversible.`)) return;
+  try {
+    await db.collection('articles').doc(id).delete();
+    toast('Article supprimé.');
+    loadArticles();
+  } catch(e) {
+    toast('Erreur suppression', false);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// TÉMOIGNAGES
+// ══════════════════════════════════════════════════════════════════════════
+const SEED_TESTIMONIALS = [
+  { clientName:'Laura CHAUTEMPS', clientRole:'Cliente accompagnée', rating:5, displayOrder:1, isActive:true, text:'Ayant rencontré un problème locatif, le Cabinet Fiscal Immo m\'a apporté un soutien énorme en agissant en partenariat avec le cabinet Schaeffer Avocats. Grâce à leur intervention, j\'ai obtenu gain de cause. Un grand merci à Monsieur Dago ABDELBASSIT pour l\'attention et le professionnalisme apportés à mon dossier.' },
+  { clientName:'Mary C.', clientRole:'Propriétaire', rating:5, displayOrder:2, isActive:true, text:'Merci au Cabinet Fiscal Immo, j\'ai récupéré 18 300 euros et gagné du temps l\'an dernier. Un vrai soulagement !' },
+  { clientName:'Karim B.', clientRole:'Dirigeant de société', rating:5, displayOrder:3, isActive:true, text:'Suite à un désaccord fiscal, je me sentais complètement dépassé par les demandes de l\'administration. Le Cabinet Fiscal Immo m\'a aidé à reconstituer un dossier clair, organiser l\'ensemble de mes justificatifs et structurer ma réponse de manière précise. Leur rigueur et leur méthodologie ont permis de sécuriser ma situation.' },
+  { clientName:'Sophie M.', clientRole:'Cadre supérieure, 3 biens locatifs', rating:5, displayOrder:4, isActive:true, text:'Avant le Cabinet Fiscal Immo, chaque période fiscale était un cauchemar. Maintenant, tout est prêt à temps, sans stress. Un service vraiment professionnel.' },
+  { clientName:'Marc L.', clientRole:'Investisseur immobilier', rating:5, displayOrder:5, isActive:true, text:'Je gère une SCI et deux LMNP. Le Cabinet m\'a fait gagner un temps considérable sur la gestion administrative de mes structures. Je recommande vivement.' },
+  { clientName:'Amina K.', clientRole:'Gérante de TPE', rating:5, displayOrder:6, isActive:true, text:'En tant que gérante de TPE, je jonglais entre ma vie pro et perso. Grâce au Cabinet, tout est désormais organisé, clair et à jour. Un vrai partenaire de confiance.' },
+];
+
+let testimoniesData = [];
+
+async function loadTestimonies() {
+  try {
+    const snap = await db.collection('testimonials').orderBy('displayOrder').get();
+    if (snap.empty) {
+      // Seed initial testimonials
+      const batch = db.batch();
+      SEED_TESTIMONIALS.forEach(t => {
+        const ref = db.collection('testimonials').doc();
+        batch.set(ref, { ...t, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+      });
+      await batch.commit();
+      // Reload
+      return loadTestimonies();
+    }
+    testimoniesData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderTestimonies();
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+function renderTestimonies() {
+  const loading = document.getElementById('testimonies-loading');
+  const grid    = document.getElementById('testimonies-grid');
+
+  loading.classList.add('hidden');
+  grid.classList.remove('hidden');
+
+  const stars = n => Array.from({length:5},(_,i) =>
+    `<svg class="h-4 w-4 ${i<n?'text-accent-400':'text-primary-200'}" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`
+  ).join('');
+
+  grid.innerHTML = testimoniesData.map(t => `
+    <div class="bg-white rounded-2xl border ${t.isActive ? 'border-surface-200' : 'border-dashed border-surface-200 opacity-60'} p-5">
+      <div class="flex items-start justify-between mb-3">
+        <div class="flex gap-0.5">${stars(t.rating||5)}</div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs ${t.isActive ? 'text-green-600 bg-green-50' : 'text-primary-400 bg-surface-100'} rounded-full px-2 py-0.5 font-medium">${t.isActive ? 'Visible' : 'Masqué'}</span>
+          <button onclick="toggleTestimony('${t.id}',${!t.isActive})" class="text-xs text-primary-400 hover:text-primary-600 transition-colors underline">${t.isActive ? 'Masquer' : 'Afficher'}</button>
+        </div>
+      </div>
+      <p class="text-sm text-primary-600 leading-relaxed mb-4 line-clamp-3">"${t.text}"</p>
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="font-semibold text-sm text-primary-800">${t.clientName}</p>
+          <p class="text-xs text-primary-500">${t.clientRole||''}</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="openTestimonyForm('${t.id}')" class="rounded-lg px-3 py-1.5 text-xs font-medium text-primary-600 hover:bg-surface-100 border border-surface-200 transition-colors">Modifier</button>
+          <button onclick="deleteTestimony('${t.id}','${t.clientName.replace(/'/g,"\\'")}')" class="rounded-lg px-3 py-1.5 text-xs font-medium text-red-500 hover:bg-red-50 border border-red-100 transition-colors">Suppr.</button>
+        </div>
+      </div>
+    </div>`
+  ).join('');
+}
+
+async function toggleTestimony(id, isActive) {
+  try {
+    await db.collection('testimonials').doc(id).update({ isActive });
+    toast(isActive ? 'Témoignage affiché.' : 'Témoignage masqué.');
+    loadTestimonies();
+  } catch(e) { toast('Erreur', false); }
+}
+
+async function deleteTestimony(id, name) {
+  if (!confirm(`Supprimer le témoignage de "${name}" ?`)) return;
+  try {
+    await db.collection('testimonials').doc(id).delete();
+    toast('Témoignage supprimé.');
+    loadTestimonies();
+  } catch(e) { toast('Erreur', false); }
+}
+
+function openTestimonyForm(id) {
+  const modal = document.getElementById('testimony-modal');
+  document.getElementById('testimony-form').reset();
+  document.getElementById('t-id').value = '';
+  document.getElementById('t-active').checked = true;
+  document.getElementById('testimony-form-title').textContent = 'Ajouter un témoignage';
+
+  if (id) {
+    const t = testimoniesData.find(x => x.id === id);
+    if (!t) return;
+    document.getElementById('testimony-form-title').textContent = 'Modifier le témoignage';
+    document.getElementById('t-id').value     = id;
+    document.getElementById('t-name').value   = t.clientName || '';
+    document.getElementById('t-role').value   = t.clientRole || '';
+    document.getElementById('t-text').value   = t.text || '';
+    document.getElementById('t-rating').value = t.rating || 5;
+    document.getElementById('t-order').value  = t.displayOrder || '';
+    document.getElementById('t-active').checked = !!t.isActive;
+  }
+  modal.classList.remove('hidden');
+}
+
+function closeTestimonyForm() {
+  document.getElementById('testimony-modal').classList.add('hidden');
+}
+
+document.getElementById('testimony-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn  = document.getElementById('testimony-save-btn');
+  const spin = document.getElementById('testimony-save-spin');
+  btn.disabled = true;
+  spin.classList.remove('hidden');
+
+  const id = document.getElementById('t-id').value;
+  const data = {
+    clientName:   document.getElementById('t-name').value.trim(),
+    clientRole:   document.getElementById('t-role').value.trim(),
+    text:         document.getElementById('t-text').value.trim(),
+    rating:       parseInt(document.getElementById('t-rating').value),
+    displayOrder: parseInt(document.getElementById('t-order').value) || 99,
+    isActive:     document.getElementById('t-active').checked,
+  };
+
+  try {
+    if (id) {
+      await db.collection('testimonials').doc(id).update(data);
+      toast('Témoignage mis à jour !');
+    } else {
+      data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      await db.collection('testimonials').add(data);
+      toast('Témoignage ajouté !');
+    }
+    closeTestimonyForm();
+    loadTestimonies();
+  } catch(err) {
+    toast('Erreur : ' + err.message, false);
+  }
+  btn.disabled = false;
+  spin.classList.add('hidden');
+});
+</script>
+
+</body>
+</html>

@@ -284,6 +284,11 @@
     </a>
   </div>
 
+  <!-- Firebase SDK (for Firestore articles — optional, degrades gracefully) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="../firebase-config.js"></script>
+
   <script>
     // Navbar scroll
     const navbar = document.getElementById('navbar');
@@ -333,7 +338,7 @@
       });
     });
 
-    // ─── Dynamic blog loading from manifest.json ────────────────────────────
+    // ─── Dynamic blog loading (Firestore + manifest.json) ───────────────────
     const CAT_LABELS = {
       fiscalite: 'Fiscalité', immobilier: 'Immobilier',
       organisation: 'Organisation', entreprise: 'Entreprise'
@@ -358,8 +363,10 @@
     function buildCard(post) {
       const cat = post.category || (post.tags && post.tags[0]) || 'fiscalite';
       const catLabel = CAT_LABELS[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
-      const url = post.url || (post.slug + '.html');
-      const date = new Date(post.date);
+      // Firestore articles use post.html?id=, static manifest articles use their url
+      const url = post.firestoreId ? ('post.html?id=' + post.firestoreId) : (post.url || (post.slug + '.html'));
+      const rawDate = post.date && post.date.toDate ? post.date.toDate() : new Date(post.date);
+      const date = isNaN(rawDate) ? new Date() : rawDate;
       const dateFr = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
 
       const imageHTML = post.image
@@ -394,33 +401,56 @@
 
     async function loadBlog() {
       const grid = document.getElementById('blog-grid');
+
+      // 1. Try to load manifest.json (static articles)
+      let staticPosts = [];
       try {
         const res = await fetch('../content/blog/manifest.json');
-        if (!res.ok) throw new Error('manifest not found');
-        const posts = await res.json();
-
-        // Remove loading spinner
-        grid.innerHTML = '';
-
-        if (!posts.length) {
-          document.getElementById('blog-empty').classList.remove('hidden');
-          return;
-        }
-
-        posts.forEach(post => {
-          const card = buildCard(post);
-          grid.appendChild(card);
-          revealObserver.observe(card);
-        });
-
-        // Re-apply current filter after loading
-        if (currentFilter !== 'all') applyFilter(currentFilter);
-
+        if (res.ok) staticPosts = await res.json();
       } catch (e) {
-        grid.innerHTML = '';
-        document.getElementById('blog-empty').classList.remove('hidden');
-        console.warn('Blog manifest load failed:', e);
+        console.warn('Manifest load failed:', e);
       }
+
+      // 2. Try to load Firestore articles (published=true) if Firebase configured
+      let firestorePosts = [];
+      if (window.FIREBASE_CONFIG && window.FIREBASE_CONFIG.apiKey !== 'VOTRE_API_KEY') {
+        try {
+          if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
+          const db = firebase.firestore();
+          const snap = await db.collection('articles')
+            .where('published', '==', true)
+            .orderBy('createdAt', 'desc')
+            .get();
+          snap.forEach(doc => {
+            firestorePosts.push({ ...doc.data(), firestoreId: doc.id });
+          });
+        } catch (e) {
+          console.warn('Firestore articles load failed:', e);
+        }
+      }
+
+      // 3. Merge: Firestore articles first, then static ones not already covered by slug
+      const firestoreSlugs = new Set(firestorePosts.map(p => p.slug).filter(Boolean));
+      const merged = [
+        ...firestorePosts,
+        ...staticPosts.filter(p => !firestoreSlugs.has(p.slug))
+      ];
+
+      // 4. Render
+      grid.innerHTML = '';
+
+      if (!merged.length) {
+        document.getElementById('blog-empty').classList.remove('hidden');
+        return;
+      }
+
+      merged.forEach(post => {
+        const card = buildCard(post);
+        grid.appendChild(card);
+        revealObserver.observe(card);
+      });
+
+      if (currentFilter !== 'all') applyFilter(currentFilter);
     }
 
     document.addEventListener('DOMContentLoaded', loadBlog);
