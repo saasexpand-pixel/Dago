@@ -19,12 +19,12 @@
  */
 
 window.FIREBASE_CONFIG = {
-  apiKey:            "VOTRE_API_KEY",
-  authDomain:        "VOTRE_PROJECT_ID.firebaseapp.com",
-  projectId:         "VOTRE_PROJECT_ID",
-  storageBucket:     "VOTRE_PROJECT_ID.appspot.com",
-  messagingSenderId: "VOTRE_SENDER_ID",
-  appId:             "VOTRE_APP_ID"
+  apiKey:            "AIzaSyDAWF5o0O4eyE91ijYLiu7A-Ihq8_HSDvw",
+  authDomain:        "fir-d26b9.firebaseapp.com",
+  projectId:         "fir-d26b9",
+  storageBucket:     "fir-d26b9.firebasestorage.app",
+  messagingSenderId: "852693277036",
+  appId:             "1:852693277036:web:d3ee6cb364f4d5783dbb49"
 };
 
 // Mot de passe pour accéder à l'espace admin (/admin/)
