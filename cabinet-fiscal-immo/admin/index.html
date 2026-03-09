@@ -49,30 +49,21 @@
 
       <form id="login-form" class="space-y-5">
         <div>
-          <label class="block text-sm font-medium text-primary-700 mb-1.5">Email</label>
-          <input id="email" type="email" required autocomplete="email"
-            class="w-full rounded-xl border border-surface-200 px-4 py-3 text-sm text-primary-800 placeholder-primary-300 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all"
-            placeholder="admin@cabinetfiscalimmo.fr">
-        </div>
-        <div>
           <label class="block text-sm font-medium text-primary-700 mb-1.5">Mot de passe</label>
           <div class="relative">
             <input id="password" type="password" required autocomplete="current-password"
               class="w-full rounded-xl border border-surface-200 px-4 py-3 text-sm text-primary-800 placeholder-primary-300 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all pr-11"
               placeholder="••••••••">
             <button type="button" id="toggle-pwd" class="absolute right-3 top-1/2 -translate-y-1/2 text-primary-400 hover:text-primary-600 transition-colors">
-              <svg id="eye-icon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
               </svg>
             </button>
           </div>
         </div>
-        <button type="submit" id="submit-btn"
-          class="w-full rounded-xl bg-accent-500 hover:bg-accent-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent-500/25 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
-          <span id="btn-text">Se connecter</span>
-          <svg id="btn-spinner" class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-          </svg>
+        <button type="submit"
+          class="w-full rounded-xl bg-accent-500 hover:bg-accent-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent-500/25 transition-all duration-200">
+          Se connecter
         </button>
       </form>
     </div>
@@ -82,67 +73,41 @@
     </p>
   </div>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="../firebase-config.js"></script>
-
   <script>
-    // Init Firebase
-    if (!window.FIREBASE_CONFIG || window.FIREBASE_CONFIG.apiKey === 'VOTRE_API_KEY') {
-      document.getElementById('error-msg').textContent = '⚠️ firebase-config.js non configuré. Suivez les instructions dans le fichier.';
-      document.getElementById('error-msg').classList.remove('hidden');
-      document.getElementById('submit-btn').disabled = true;
-    } else {
-      firebase.initializeApp(window.FIREBASE_CONFIG);
-      const auth = firebase.auth();
-
-      // Redirect if already logged in
-      auth.onAuthStateChanged(user => {
-        if (user) window.location.replace('dashboard.html');
-      });
-
-      // Toggle password visibility
-      document.getElementById('toggle-pwd').addEventListener('click', () => {
-        const pwd = document.getElementById('password');
-        pwd.type = pwd.type === 'password' ? 'text' : 'password';
-      });
-
-      // Login form
-      document.getElementById('login-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = document.getElementById('submit-btn');
-        const spinner = document.getElementById('btn-spinner');
-        const btnText = document.getElementById('btn-text');
-        const errorMsg = document.getElementById('error-msg');
-
-        btn.disabled = true;
-        spinner.classList.remove('hidden');
-        btnText.textContent = 'Connexion…';
-        errorMsg.classList.add('hidden');
-
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-
-        try {
-          await auth.signInWithEmailAndPassword(email, password);
-          window.location.replace('dashboard.html');
-        } catch (err) {
-          const messages = {
-            'auth/user-not-found': 'Aucun compte avec cet email.',
-            'auth/wrong-password': 'Mot de passe incorrect.',
-            'auth/invalid-email': 'Email invalide.',
-            'auth/too-many-requests': 'Trop de tentatives. Réessayez dans quelques minutes.',
-            'auth/invalid-credential': 'Email ou mot de passe incorrect.',
-          };
-          errorMsg.textContent = messages[err.code] || 'Erreur de connexion : ' + err.message;
-          errorMsg.classList.remove('hidden');
-          btn.disabled = false;
-          spinner.classList.add('hidden');
-          btnText.textContent = 'Se connecter';
-        }
-      });
+    // Already logged in? Redirect immediately.
+    if (sessionStorage.getItem('admin_auth') === 'true') {
+      window.location.replace('dashboard.html');
     }
+
+    // Toggle password visibility
+    document.getElementById('toggle-pwd').addEventListener('click', () => {
+      const pwd = document.getElementById('password');
+      pwd.type = pwd.type === 'password' ? 'text' : 'password';
+    });
+
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const entered  = document.getElementById('password').value;
+      const expected = window.ADMIN_PASSWORD;
+      const errorMsg = document.getElementById('error-msg');
+
+      if (!expected || expected === 'changez-ce-mot-de-passe') {
+        errorMsg.textContent = '⚠️ Mot de passe non configuré dans firebase-config.js (ADMIN_PASSWORD)';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      if (entered === expected) {
+        sessionStorage.setItem('admin_auth', 'true');
+        window.location.replace('dashboard.html');
+      } else {
+        errorMsg.textContent = 'Mot de passe incorrect.';
+        errorMsg.classList.remove('hidden');
+        document.getElementById('password').value = '';
+        document.getElementById('password').focus();
+      }
+    });
   </script>
 </body>
 </html>

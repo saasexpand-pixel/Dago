@@ -259,36 +259,34 @@
 <!-- Toast notification -->
 <div id="toast" class="hidden fixed bottom-6 right-6 z-[100] bg-primary-900 text-white px-5 py-3 rounded-xl shadow-xl text-sm font-medium transition-all"></div>
 
-<!-- Firebase -->
+<!-- Firebase (Firestore only, no Auth) -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="../firebase-config.js"></script>
 
 <script>
-// ── Init ───────────────────────────────────────────────────────────────────
+// ── Auth guard (simple password via sessionStorage) ─────────────────────────
+if (sessionStorage.getItem('admin_auth') !== 'true') {
+  window.location.replace('index.html');
+}
+
+// ── Init Firestore ──────────────────────────────────────────────────────────
 if (!window.FIREBASE_CONFIG || window.FIREBASE_CONFIG.apiKey === 'VOTRE_API_KEY') {
-  alert('⚠️ Configurez firebase-config.js avant d\'utiliser l\'admin.');
+  alert('⚠️ Configurez firebase-config.js (apiKey, projectId…) avant d\'utiliser l\'admin.');
   window.location.replace('index.html');
 }
 
 firebase.initializeApp(window.FIREBASE_CONFIG);
-const auth = firebase.auth();
-const db   = firebase.firestore();
+const db = firebase.firestore();
 
-// Auth guard
-auth.onAuthStateChanged(user => {
-  if (!user) {
-    window.location.replace('index.html');
-    return;
-  }
-  document.getElementById('user-email').textContent = user.email;
-  document.getElementById('loading-overlay').classList.add('hidden');
-  loadArticles();
-  loadTestimonies();
+document.getElementById('loading-overlay').classList.add('hidden');
+loadArticles();
+loadTestimonies();
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+  sessionStorage.removeItem('admin_auth');
+  window.location.replace('index.html');
 });
-
-document.getElementById('logout-btn').addEventListener('click', () => auth.signOut());
 
 // ── Tabs ───────────────────────────────────────────────────────────────────
 function switchTab(tab) {
