@@ -267,13 +267,13 @@
 <script>
 // ── Auth guard (simple password via sessionStorage) ─────────────────────────
 if (sessionStorage.getItem('admin_auth') !== 'true') {
-  window.location.replace('index.html');
+  window.location.replace('/admin/');
 }
 
 // ── Init Firestore ──────────────────────────────────────────────────────────
 if (!window.FIREBASE_CONFIG || window.FIREBASE_CONFIG.apiKey === 'VOTRE_API_KEY') {
   alert('⚠️ Configurez firebase-config.js (apiKey, projectId…) avant d\'utiliser l\'admin.');
-  window.location.replace('index.html');
+  window.location.replace('/admin/');
 }
 
 firebase.initializeApp(window.FIREBASE_CONFIG);
@@ -285,7 +285,7 @@ loadTestimonies();
 
 document.getElementById('logout-btn').addEventListener('click', () => {
   sessionStorage.removeItem('admin_auth');
-  window.location.replace('index.html');
+  window.location.replace('/admin/');
 });
 
 // ── Tabs ───────────────────────────────────────────────────────────────────

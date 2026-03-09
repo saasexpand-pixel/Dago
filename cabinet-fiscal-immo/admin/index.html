@@ -77,7 +77,7 @@
   <script>
     // Already logged in? Redirect immediately.
     if (sessionStorage.getItem('admin_auth') === 'true') {
-      window.location.replace('dashboard.html');
+      window.location.replace('/admin/dashboard.html');
     }
 
     // Toggle password visibility
@@ -100,7 +100,7 @@
 
       if (entered === expected) {
         sessionStorage.setItem('admin_auth', 'true');
-        window.location.replace('dashboard.html');
+        window.location.replace('/admin/dashboard.html');
       } else {
         errorMsg.textContent = 'Mot de passe incorrect.';
         errorMsg.classList.remove('hidden');
