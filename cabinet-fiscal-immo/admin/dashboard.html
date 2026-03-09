@@ -458,7 +458,7 @@ async function loadArticles() {
   const loading = document.getElementById('articles-loading');
   try {
     console.log('Loading articles...');
-    const snap = await db.collection('articles').orderBy('createdAt','desc').get();
+    const snap = await db.collection('articles').get();
     console.log('Articles found:', snap.size);
     if (snap.empty) {
       // Seed initial articles
@@ -642,7 +642,7 @@ async function loadTestimonies() {
   const loading = document.getElementById('testimonies-loading');
   try {
     console.log('Loading testimonials...');
-    const snap = await db.collection('testimonials').orderBy('displayOrder').get();
+    const snap = await db.collection('testimonials').get();
     console.log('Testimonials found:', snap.size);
     if (snap.empty) {
       console.log('Seeding testimonials...');

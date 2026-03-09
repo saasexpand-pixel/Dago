@@ -2011,19 +2011,23 @@
       try {
         if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
         const db = firebase.firestore();
-        const snap = await db.collection('testimonials')
-          .where('isActive', '==', true)
-          .orderBy('displayOrder', 'asc')
-          .get();
+        const snap = await db.collection('testimonials').get();
         if (snap.empty) return;
+        // Filter active testimonials client-side and sort by displayOrder
+        const activeTestimonials = [];
+        snap.forEach(doc => {
+          const data = doc.data();
+          if (data.isActive) activeTestimonials.push(data);
+        });
+        activeTestimonials.sort((a, b) => (a.displayOrder || 99) - (b.displayOrder || 99));
+        if (!activeTestimonials.length) return;
 
         const STAR_SVG = '<svg class="h-5 w-5 text-accent-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
 
         const grid = document.getElementById('testimonials-grid');
         grid.innerHTML = '';
 
-        snap.forEach(doc => {
-          const t = doc.data();
+        activeTestimonials.forEach(t => {
           const rating = Math.min(5, Math.max(1, parseInt(t.rating) || 5));
           const stars = STAR_SVG.repeat(rating);
           const card = document.createElement('div');

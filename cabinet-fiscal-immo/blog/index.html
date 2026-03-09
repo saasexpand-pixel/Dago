@@ -411,21 +411,22 @@
         console.warn('Manifest load failed:', e);
       }
 
-      // 2. Try to load Firestore articles (published=true) if Firebase configured
+      // 2. Try to load Firestore articles if Firebase configured
       let firestorePosts = [];
       if (window.FIREBASE_CONFIG && window.FIREBASE_CONFIG.apiKey !== 'VOTRE_API_KEY') {
         try {
           if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
           const db = firebase.firestore();
-          const snap = await db.collection('articles')
-            .where('published', '==', true)
-            .orderBy('createdAt', 'desc')
-            .get();
+          const snap = await db.collection('articles').get();
           snap.forEach(doc => {
-            firestorePosts.push({ ...doc.data(), firestoreId: doc.id });
+            const data = doc.data();
+            if (data.published) {
+              firestorePosts.push({ ...data, firestoreId: doc.id });
+            }
           });
+          console.log('Firestore articles loaded:', firestorePosts.length);
         } catch (e) {
-          console.warn('Firestore articles load failed:', e);
+          console.error('Firestore articles load failed:', e);
         }
       }
 
